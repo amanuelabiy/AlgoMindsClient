@@ -36,7 +36,6 @@ function SignUp() {
                 id="first-name"
               />
             </div>
-
             <div className="flex flex-col w-full">
               <Label className={styles.label} htmlFor="last-name">
                 Last Name
@@ -46,6 +45,7 @@ function SignUp() {
                 className={styles.input}
                 placeholder="Doe"
                 id="last-name"
+                required
               />
             </div>
           </div>
@@ -58,6 +58,7 @@ function SignUp() {
               className={styles.input}
               placeholder="Enter your email"
               id="email"
+              required
             />
           </div>
           <div className="mb-4">
@@ -69,6 +70,7 @@ function SignUp() {
               className={styles.input}
               placeholder="Enter your password"
               id="password"
+              required
             />
           </div>
           <div className="flex flex-row justify-between items-center mt-10 w-full">
@@ -83,13 +85,23 @@ function SignUp() {
               </Link>
             </p>
           </div>
+          <div className="flex flex-col gap-2 items-center justify-center md:justify-start mt-6">
+            <p className="text-center md:text-left text-sm text-gray-500">
+              If you need help, please contact{" "}
+              <Link href="mailto:support@algorivals.com.">
+                <span className={styles.hyperlink}>
+                  support@algorivals.com.
+                </span>
+              </Link>
+            </p>
 
-          <p className="text-center md:text-left mt-6 text-sm text-gray-500">
-            If you need help, please contact{" "}
-            <Link href="mailto:support@algorivals.com.">
-              <span className={styles.hyperlink}>support@algorivals.com.</span>
+            <Link href="/terms-of-use">
+              <p className="text-gray-500 underline text-sm">Terms of Use</p>
             </Link>
-          </p>
+            <Link href="/privacy-policy">
+              <p className="text-gray-500 underline text-sm">Privacy Policy</p>
+            </Link>
+          </div>
         </form>
       </div>
     </div>
