@@ -1,13 +1,22 @@
 import { z } from "zod";
 
-export const emailSchema = z.string().trim().email().min(1).max(255);
-export const passwordSchema = z.string().trim().min(6).max(255);
+export const emailSchema = z
+  .string()
+  .trim()
+  .email()
+  .min(1, "Email is required")
+  .max(255);
+export const passwordSchema = z
+  .string()
+  .trim()
+  .min(6, "Password must contain at least 6 character(s)")
+  .max(255);
 export const verificationCodeSchema = z.string().uuid();
 
 export const registerSchema = z
   .object({
-    firstName: z.string().trim().min(1).max(255),
-    lastName: z.string().trim().min(1).max(255),
+    firstName: z.string().trim().min(1, "First name is required").max(255),
+    lastName: z.string().trim().min(1, "Last name is required").max(255),
     email: emailSchema,
     password: passwordSchema,
     confirmPassword: passwordSchema,

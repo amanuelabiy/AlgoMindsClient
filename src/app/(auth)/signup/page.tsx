@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
 import React from "react";
 import { RegisterType } from "@/lib/auth/api";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schema/auth-schema";
 
 const styles = {
@@ -30,6 +31,7 @@ function SignUp() {
       email: "",
       password: "",
     },
+    resolver: zodResolver(registerSchema),
   });
 
   const onSubmit: SubmitHandler<RegisterType> = async (data: RegisterType) => {
