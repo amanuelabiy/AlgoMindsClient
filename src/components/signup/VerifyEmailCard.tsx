@@ -21,11 +21,9 @@ function VerifyEmailCard({ getValues, hyperLinkStyles }: VerifyEmailCardProps) {
       </h1>
       <p className="text-lg">
         We just sent a verification link to {""}
-        <Link href={`mailto:${getValues().email}`}>
-          <span className={`${hyperLinkStyles} text-center`}>
-            {getValues().email}
-          </span>
-        </Link>
+        <span className={`${hyperLinkStyles} text-center`}>
+          {getValues().email}
+        </span>
       </p>
       <Link href="/login">
         <Button className=" bg-secondaryColor text-white py-5 px-6 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100">

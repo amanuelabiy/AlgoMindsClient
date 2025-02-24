@@ -78,6 +78,8 @@ function SignUp() {
     });
   };
 
+  const formIsSubmitting = isSubmitting || isPending;
+
   return (
     <div className="flex justify-center items-start min-h-[85vh] pt-2">
       <div className="w-full max-w-md rounded-lg p-6">
@@ -259,17 +261,17 @@ function SignUp() {
                 {step === 2 ? (
                   <Button
                     className="bg-secondaryColor text-white py-6 px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100"
-                    disabled={isSubmitting}
+                    disabled={formIsSubmitting}
                     type="submit"
                   >
-                    {isSubmitting ? "Loading..." : "Sign up"}
+                    {formIsSubmitting ? "Loading..." : "Sign up"}
                   </Button>
                 ) : null}
 
                 {step === 2 ? (
                   <Button
                     className="bg-secondaryColor text-white py-6 px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100"
-                    disabled={isSubmitting}
+                    disabled={formIsSubmitting}
                     type="button"
                     onClick={handleBackClick}
                   >

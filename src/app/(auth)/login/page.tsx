@@ -3,10 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { LoginType } from "@/lib/auth/api";
+import { loginMutationFn, LoginType } from "@/lib/auth/api";
 import { loginSchema } from "@/schema/auth-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -19,11 +22,12 @@ const styles = {
 };
 
 function Login() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     setError,
-    trigger,
     formState: { errors, isSubmitting },
   } = useForm<LoginType>({
     defaultValues: {
@@ -33,16 +37,28 @@ function Login() {
     resolver: zodResolver(loginSchema),
   });
 
+  const { mutate, isPending } = useMutation({ mutationFn: loginMutationFn });
+
   const onSubmit: SubmitHandler<LoginType> = async (data: LoginType) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      throw new Error("Email is already taken");
-    } catch (error) {
-      setError("root", {
-        message: "Email is already taken",
-      });
-    }
+    mutate(data, {
+      onSuccess: (response) => {
+        console.log(response);
+        if (response.data.mfaRequired) {
+          router.replace(`/verify-mfa?email=${data.email}`);
+        }
+
+        router.replace("/");
+      },
+      onError: (error) => {
+        setError("root", {
+          message: error.message,
+        });
+      },
+    });
   };
+
+  const formIsSubmitting = isSubmitting || isPending;
+
   return (
     <div className="flex justify-center items-start min-h-[85vh] pt-16">
       <div className="w-full max-w-md rounded-lg p-6">
@@ -97,9 +113,9 @@ function Login() {
             <Button
               className="bg-secondaryColor text-white py-6 px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100"
               type="submit"
-              disabled={isSubmitting}
+              disabled={formIsSubmitting}
             >
-              {isSubmitting ? "Loading..." : "Login"}
+              {formIsSubmitting ? "Loading..." : "Login"}
             </Button>
 
             <p className="text-gray-500 text-sm text-right">
