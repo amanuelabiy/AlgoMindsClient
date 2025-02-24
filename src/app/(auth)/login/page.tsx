@@ -15,6 +15,7 @@ const styles = {
     "w-full mt-1 h-12 p-4 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none",
   label: "block text-sm font-medium text-gray-700",
   hyperlink: "text-blue-500 underline",
+  errorMessage: "text-red-500 text-sm mt-1",
 };
 
 function Login() {
@@ -63,6 +64,11 @@ function Login() {
               id="email"
               {...register("email", { required: "Email is required" })}
             />
+            {errors.email && (
+              <span className={styles.errorMessage}>
+                {errors.email.message}
+              </span>
+            )}
           </div>
           <div className="mb-4">
             <Label className={styles.label} htmlFor="password">
@@ -75,13 +81,25 @@ function Login() {
               id="password"
               {...register("password", { required: "Password is required" })}
             />
+            {errors.password && (
+              <span className={styles.errorMessage}>
+                {errors.password.message}
+              </span>
+            )}
           </div>
+
+          {errors.root && (
+            <p className={`${styles.errorMessage} text-center my-2`}>
+              {errors.root.message}
+            </p>
+          )}
           <div className="flex flex-row justify-between items-center mt-10 w-full">
             <Button
               className="bg-secondaryColor text-white py-6 px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100"
               type="submit"
+              disabled={isSubmitting}
             >
-              Login
+              {isSubmitting ? "Loading..." : "Login"}
             </Button>
 
             <p className="text-gray-500 text-sm text-right">

@@ -6,10 +6,11 @@ import { Label } from "@/components/ui/label";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
 import React, { useState } from "react";
-import { RegisterType } from "@/lib/auth/api";
+import { registerMutationFn, RegisterType } from "@/lib/auth/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schema/auth-schema";
 import { TiArrowRight, TiArrowLeft } from "react-icons/ti";
+import { useMutation } from "@tanstack/react-query";
 
 const styles = {
   input:
@@ -21,6 +22,7 @@ const styles = {
 
 function SignUp() {
   const [step, setStep] = useState<number>(1);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const {
     register,
@@ -40,15 +42,19 @@ function SignUp() {
     resolver: zodResolver(registerSchema),
   });
 
+  const { mutate, isPending } = useMutation({ mutationFn: registerMutationFn });
+
   const onSubmit: SubmitHandler<RegisterType> = async (data: RegisterType) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      throw new Error("Email is already taken");
-    } catch (error) {
-      setError("root", {
-        message: "Email is already taken",
-      });
-    }
+    mutate(data, {
+      onSuccess: () => {
+        setIsSubmitted(true);
+      },
+      onError: (error) => {
+        setError("root", {
+          message: error.message,
+        });
+      },
+    });
   };
 
   const handleNextClick = async () => {

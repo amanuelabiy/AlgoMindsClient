@@ -3,8 +3,8 @@ import { z } from "zod";
 export const emailSchema = z
   .string()
   .trim()
-  .email()
   .min(1, "Email is required")
+  .email()
   .max(255);
 export const passwordSchema = z
   .string()
@@ -17,6 +17,12 @@ export const confirmPasswordSchema = z
   .min(6, "Confirm Password must contain at least 6 character(s)")
   .max(255);
 export const verificationCodeSchema = z.string().uuid();
+
+export const passwordSchemaForLogin = z
+  .string()
+  .trim()
+  .min(6, "Password is required")
+  .max(255);
 
 export const registerSchema = z
   .object({
@@ -34,7 +40,7 @@ export const registerSchema = z
 
 export const loginSchema = z.object({
   email: emailSchema,
-  password: passwordSchema,
+  password: passwordSchemaForLogin,
   userAgent: z.string().optional(),
 });
 
