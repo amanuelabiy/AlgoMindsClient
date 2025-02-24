@@ -11,15 +11,21 @@ export const passwordSchema = z
   .trim()
   .min(6, "Password must contain at least 6 character(s)")
   .max(255);
+export const confirmPasswordSchema = z
+  .string()
+  .trim()
+  .min(6, "Confirm Password must contain at least 6 character(s)")
+  .max(255);
 export const verificationCodeSchema = z.string().uuid();
 
 export const registerSchema = z
   .object({
     firstName: z.string().trim().min(1, "First name is required").max(255),
-    lastName: z.string().trim().min(1, "Last name is required").max(255),
+    lastName: z.string().trim().min(1, "Last name is required ").max(255),
+    username: z.string().trim().min(1, "Username is required").max(255),
     email: emailSchema,
     password: passwordSchema,
-    confirmPassword: passwordSchema,
+    confirmPassword: confirmPasswordSchema,
   })
   .refine((val) => val.password === val.confirmPassword, {
     message: "Passwords do not match",
