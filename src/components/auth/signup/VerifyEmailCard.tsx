@@ -1,6 +1,6 @@
 import React from "react";
 import { LuMailCheck } from "react-icons/lu";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { RegisterType } from "@/lib/auth/api";
 import { TiArrowRight } from "react-icons/ti";
 import Link from "next/link";

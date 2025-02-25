@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schema/auth-schema";
 import { TiArrowRight, TiArrowLeft } from "react-icons/ti";
 import { useMutation } from "@tanstack/react-query";
-import VerifyEmailCard from "@/components/signup/VerifyEmailCard";
+import VerifyEmailCard from "@/components/auth/signup/VerifyEmailCard";
 
 const styles = {
   input:

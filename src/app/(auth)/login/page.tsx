@@ -28,6 +28,7 @@ function Login() {
     register,
     handleSubmit,
     setError,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<LoginType>({
     defaultValues: {
@@ -90,13 +91,22 @@ function Login() {
             <Label className={styles.label} htmlFor="password">
               Password
             </Label>
-            <Input
-              type="password"
-              className={styles.input}
-              placeholder="************"
-              id="password"
-              {...register("password", { required: "Password is required" })}
-            />
+            <div className="flex flex-col gap-3 justify-center items-start">
+              <Input
+                type="password"
+                className={styles.input}
+                placeholder="************"
+                id="password"
+                {...register("password", { required: "Password is required" })}
+              />
+
+              <Link
+                className="text-gray-500 text-sm self-end"
+                href={`/forgot-password?email=${getValues().email}`}
+              >
+                <p>Forgot your password?</p>
+              </Link>
+            </div>
             {errors.password && (
               <span className={styles.errorMessage}>
                 {errors.password.message}
