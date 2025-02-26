@@ -1,9 +1,11 @@
-import Hero from "./hero";
+import Features from "./features/features";
+import Hero from "./hero/hero";
 
 function LandingPage() {
   return (
-    <div className="container mx-auto">
-      <Hero></Hero>
+    <div className="w-full">
+      <Hero />
+      <Features />
     </div>
   );
 }

@@ -52,6 +52,8 @@ export default {
         },
         primaryColor: "#2C3E50",
         secondaryColor: "#2980B9",
+        lighterBlue: "#21A7FF",
+        neutralLightColor: "#ECF0F1",
       },
       borderRadius: {
         lg: "var(--radius)",
