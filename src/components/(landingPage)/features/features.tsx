@@ -21,7 +21,7 @@ function Features() {
   }, []);
 
   return (
-    <div className="h-[400px] w-full bg-neutralLightColor bg-cover bg-center bg-no-repeat py-20">
+    <div className="h-auto w-full bg-neutralLightColor bg-cover bg-center bg-no-repeat py-20">
       <div className="flex flex-col justify-center items-center gap-4">
         <p className="text-[rgba(44,62,80,0.7)] text-center text-[24px] font-semibold leading-normal">
           Feature
