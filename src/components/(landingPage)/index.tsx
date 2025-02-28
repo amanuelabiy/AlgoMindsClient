@@ -1,4 +1,5 @@
 import AboutUs from "./aboutUs/AboutUs";
+import EmailMessages from "./emailMessages/EmailMessages";
 import Features from "./features/features";
 import Hero from "./hero/hero";
 
@@ -8,6 +9,7 @@ function LandingPage() {
       <Hero />
       <Features />
       <AboutUs />
+      <EmailMessages />
     </div>
   );
 }
