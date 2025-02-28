@@ -13,16 +13,12 @@ import { IoExtensionPuzzleOutline } from "react-icons/io5";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { IoTrophyOutline } from "react-icons/io5";
 
-interface FeaturesCarouselProps {
-  windowWidth: number;
-}
-
 interface Feature {
   icon: React.ReactElement<IconType>;
   description: string;
 }
 
-function FeaturesCarousel({ windowWidth }: FeaturesCarouselProps) {
+function FeaturesCarousel() {
   const features: Feature[] = [
     {
       icon: <FaCode />,

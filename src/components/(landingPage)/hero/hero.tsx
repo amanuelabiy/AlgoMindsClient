@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Hero() {
@@ -20,9 +21,11 @@ function Hero() {
           setting!
         </p>
         <div>
-          <Button className="bg-lighterBlue mt-9 text-white py-6 px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100">
-            Join a Challenge
-          </Button>
+          <Link href="/signup">
+            <Button className="bg-lighterBlue mt-9 text-white py-6 px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100">
+              Join a Challenge
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="flex justify-center items-center lg:w-3/4 w-full">

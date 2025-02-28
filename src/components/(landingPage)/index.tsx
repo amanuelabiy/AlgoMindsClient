@@ -1,3 +1,4 @@
+import AboutUs from "./aboutUs/AboutUs";
 import Features from "./features/features";
 import Hero from "./hero/hero";
 
@@ -6,6 +7,7 @@ function LandingPage() {
     <div className="w-full">
       <Hero />
       <Features />
+      <AboutUs />
     </div>
   );
 }

@@ -54,6 +54,7 @@ export default {
         secondaryColor: "#2980B9",
         lighterBlue: "#21A7FF",
         neutralLightColor: "#ECF0F1",
+        darkBlue: "#060129",
       },
       borderRadius: {
         lg: "var(--radius)",
