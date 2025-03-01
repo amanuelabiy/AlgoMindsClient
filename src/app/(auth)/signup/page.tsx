@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { registerMutationFn, RegisterType } from "@/lib/auth/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schema/auth-schema";
@@ -31,6 +31,7 @@ function SignUp() {
     setError,
     trigger,
     getValues,
+    setFocus,
     formState: { errors, isSubmitting },
   } = useForm<RegisterType>({
     defaultValues: {
@@ -43,6 +44,10 @@ function SignUp() {
     },
     resolver: zodResolver(registerSchema),
   });
+
+  useEffect(() => {
+    setFocus("firstName");
+  }, [setFocus]);
 
   const { mutate, isPending } = useMutation({ mutationFn: registerMutationFn });
 

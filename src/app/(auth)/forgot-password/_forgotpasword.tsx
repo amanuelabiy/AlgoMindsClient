@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const styles = {
@@ -36,8 +36,7 @@ function ForgotPassword() {
     register,
     handleSubmit,
     setError,
-    getValues,
-    trigger,
+    setFocus,
     formState: { errors, isSubmitting },
   } = useForm<ForgotPasswordType>({
     defaultValues: {
@@ -45,6 +44,10 @@ function ForgotPassword() {
     },
     resolver: zodResolver(forgotPasswordSchema),
   });
+
+  useEffect(() => {
+    setFocus("email");
+  }, [setFocus]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: forgotPasswordMutationFn,

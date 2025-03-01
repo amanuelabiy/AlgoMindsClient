@@ -7,7 +7,7 @@ import { resetPasswordMutationFn, ResetPasswordType } from "@/lib/auth/api";
 import { resetPasswordSchema } from "@/schema/auth-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ResetPasswordSendMessage from "./ResetPasswordSendMessage";
 
@@ -31,8 +31,7 @@ function ResetPassword({
     register,
     handleSubmit,
     setError,
-    getValues,
-    trigger,
+    setFocus,
     formState: { errors, isSubmitting },
   } = useForm<ResetPasswordType>({
     defaultValues: {
@@ -41,6 +40,10 @@ function ResetPassword({
     },
     resolver: zodResolver(resetPasswordSchema),
   });
+
+  useEffect(() => {
+    setFocus("verificationCode");
+  }, [setFocus]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: resetPasswordMutationFn,

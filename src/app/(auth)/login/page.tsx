@@ -63,7 +63,6 @@ function Login() {
   };
 
   const emailValue = watch("email");
-  console.log("email value", emailValue);
 
   const formIsSubmitting = isSubmitting || isPending;
   const displayRootError =
