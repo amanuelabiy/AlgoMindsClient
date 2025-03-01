@@ -23,6 +23,9 @@ const styles = {
 };
 
 function ForgotPassword() {
+  const [passwordResetSuccess, setPasswordResetSuccess] =
+    useState<boolean>(false);
+
   const params = useSearchParams();
 
   const email = params.get("email");
@@ -65,12 +68,15 @@ function ForgotPassword() {
   return (
     <div className="flex justify-center items-start min-h-[85vh] pt-32">
       <div className="w-full max-w-md rounded-lg p-6">
-        <div className="flex flex-col gap-4 items-center justify-center">
-          <h2 className="text-4xl font-bold text-center">
-            {step === 1 ? "Request Password Reset" : "Reset Your Password"}
-          </h2>
-        </div>
-        <div className="mt-4">
+        {passwordResetSuccess ? null : (
+          <div className="flex flex-col gap-4 items-center justify-center">
+            <h2 className="text-4xl font-bold text-center">
+              {step === 1 ? "Request Password Reset" : "Reset Your Password"}
+            </h2>
+          </div>
+        )}
+
+        <div className={`${passwordResetSuccess ? "mt-0" : "mt-4"}`}>
           {step === 1 ? (
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4 flex flex-col gap-2">
@@ -122,7 +128,10 @@ function ForgotPassword() {
               </div>
             </form>
           ) : (
-            <ResetPassword styles={styles} />
+            <ResetPassword
+              styles={styles}
+              setPasswordResetSuccess={setPasswordResetSuccess}
+            />
           )}
         </div>
       </div>

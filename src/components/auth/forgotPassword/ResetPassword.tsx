@@ -18,9 +18,13 @@ interface ResetPasswordProps {
     input: string;
     label: string;
   };
+  setPasswordResetSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ResetPassword({ styles }: ResetPasswordProps) {
+function ResetPassword({
+  styles,
+  setPasswordResetSuccess,
+}: ResetPasswordProps) {
   const [step, setStep] = useState<number>(1);
 
   const {
@@ -48,6 +52,7 @@ function ResetPassword({ styles }: ResetPasswordProps) {
     mutate(data, {
       onSuccess: () => {
         setStep(2);
+        setPasswordResetSuccess(true);
       },
       onError: (error) => {
         setError("root", {
