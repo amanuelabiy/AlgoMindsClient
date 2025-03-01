@@ -48,7 +48,6 @@ function Login() {
   const onSubmit: SubmitHandler<LoginType> = async (data: LoginType) => {
     mutate(data, {
       onSuccess: (response) => {
-        console.log(response);
         if (response.data.mfaRequired) {
           router.replace(`/verify-mfa?email=${data.email}`);
         }

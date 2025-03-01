@@ -17,6 +17,9 @@ export const confirmPasswordSchema = z
   .min(6, "Confirm Password must contain at least 6 character(s)")
   .max(255);
 export const verificationCodeSchema = z.string().uuid();
+export const passwordResetVerificationCode = z
+  .string()
+  .length(6, "Verification Code must be 6 character(s) long");
 
 export const passwordSchemaForLogin = z
   .string()
@@ -54,5 +57,5 @@ export const forgotPasswordSchema = z.object({
 
 export const resetPasswordSchema = z.object({
   password: passwordSchema,
-  verificationCode: verificationCodeSchema,
+  verificationCode: passwordResetVerificationCode,
 });
