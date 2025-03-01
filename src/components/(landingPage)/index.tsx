@@ -1,3 +1,4 @@
+import Footer from "../footer/Footer";
 import AboutUs from "./aboutUs/AboutUs";
 import EmailMessages from "./emailMessages/EmailMessages";
 import Features from "./features/features";
@@ -10,6 +11,7 @@ function LandingPage() {
       <Features />
       <AboutUs />
       <EmailMessages />
+      <Footer />
     </div>
   );
 }

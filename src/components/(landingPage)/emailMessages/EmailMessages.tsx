@@ -6,9 +6,9 @@ import { IoIosMail } from "react-icons/io";
 
 function EmailMessages() {
   return (
-    <div className="h-auto w-full bg-purpleBlue bg-cover bg-center bg-no-repeat p-16 lg:py-20 lg:px-40">
-      <div className="flex flex-row justify-center items-center max-w-full max-h-full bg-lighterPurpleBlue rounded-[12px]">
-        <div className="hidden sm:block p-8">
+    <div className="flex flex-row justify-center items-center h-auto w-full bg-purpleBlue bg-cover bg-center bg-no-repeat p-16 lg:py-20 lg:px-40">
+      <div className="flex flex-row justify-between items-center max-w-screen-lg max-h-full bg-lighterPurpleBlue rounded-[12px]">
+        <div className="hidden sm:flex sm:flex-row sm:justify-center sm:items-center p-8">
           <Image
             width={100000000}
             height={500}
@@ -31,7 +31,10 @@ function EmailMessages() {
               htmlFor="email-input"
               className="flex items-center bg-white rounded-[100px] w-full p-2 border-none focus-within:ring-2 focus-within:ring-blue-500 hover:shadow-lg hover:cursor-text"
             >
-              <Label className="bg-purpleCustom flex items-center justify-center w-14 h-12 rounded-full">
+              <Label
+                htmlFor="email-input"
+                className="bg-purpleCustom flex items-center justify-center w-14 h-12 rounded-full hover:cursor-pointer transition-transform duration-200 hover:translate-y-[-2px]"
+              >
                 <IoIosMail className="text-xl text-white" />
               </Label>
               <input
