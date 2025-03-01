@@ -79,6 +79,10 @@ function SignUp() {
   };
 
   const formIsSubmitting = isSubmitting || isPending;
+  const displayRootError =
+    errors.root?.message &&
+    !errors.username?.message &&
+    !errors.confirmPassword?.message;
 
   return (
     <div className="flex justify-center items-start min-h-[85vh] pt-2">
@@ -229,9 +233,9 @@ function SignUp() {
                       </span>
                     )}
                   </div>
-                  {errors.root && (
+                  {displayRootError && (
                     <p className={`${styles.errorMessage} text-center my-2`}>
-                      {errors.root.message}
+                      {errors.root?.message}
                     </p>
                   )}
                 </>

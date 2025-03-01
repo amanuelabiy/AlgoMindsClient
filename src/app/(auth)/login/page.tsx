@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const styles = {
@@ -28,7 +28,8 @@ function Login() {
     register,
     handleSubmit,
     setError,
-    getValues,
+    setFocus,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<LoginType>({
     defaultValues: {
@@ -37,6 +38,10 @@ function Login() {
     },
     resolver: zodResolver(loginSchema),
   });
+
+  useEffect(() => {
+    setFocus("email");
+  }, [setFocus]);
 
   const { mutate, isPending } = useMutation({ mutationFn: loginMutationFn });
 
@@ -58,7 +63,12 @@ function Login() {
     });
   };
 
+  const emailValue = watch("email");
+  console.log("email value", emailValue);
+
   const formIsSubmitting = isSubmitting || isPending;
+  const displayRootError =
+    errors.root?.message && !errors.email?.message && !errors.password?.message;
 
   return (
     <div className="flex justify-center items-start min-h-[85vh] pt-16">
@@ -99,26 +109,27 @@ function Login() {
                 id="password"
                 {...register("password", { required: "Password is required" })}
               />
-
-              <Link
-                className="text-gray-500 text-sm self-end"
-                href={`/forgot-password?email=${getValues().email}`}
-              >
-                <p>Forgot your password?</p>
-              </Link>
+              <div className="flex flex-row-reverse justify-between w-full items-center">
+                <Link
+                  className="text-gray-500 text-sm"
+                  href={`/forgot-password?email=${emailValue}`}
+                >
+                  <p>Forgot your password?</p>
+                </Link>
+                {displayRootError && (
+                  <p className={`${styles.errorMessage} text-center my-2`}>
+                    {errors.root?.message}
+                  </p>
+                )}
+                {errors.password && (
+                  <span className={styles.errorMessage}>
+                    {errors.password.message}
+                  </span>
+                )}
+              </div>
             </div>
-            {errors.password && (
-              <span className={styles.errorMessage}>
-                {errors.password.message}
-              </span>
-            )}
           </div>
 
-          {errors.root && (
-            <p className={`${styles.errorMessage} text-center my-2`}>
-              {errors.root.message}
-            </p>
-          )}
           <div className="flex flex-row justify-between items-center mt-10 w-full">
             <Button
               className="bg-secondaryColor text-white py-6 px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100"

@@ -5,7 +5,10 @@ import React from "react";
 
 function AboutUs() {
   return (
-    <div className="flex flex-col lg:flex-row lg:mx-auto lg:py-24 lg:px-24 gap-8 justify-center items-center flex-shrink-0 h-auto w-full bg-darkBlue bg-cover bg-center bg-no-repeat py-20">
+    <div
+      id="about"
+      className="flex flex-col lg:flex-row lg:mx-auto lg:py-24 lg:px-24 gap-8 justify-center items-center flex-shrink-0 h-auto w-full bg-darkBlue bg-cover bg-center bg-no-repeat py-20"
+    >
       <div className="flex flex-col lg:justify-start lg:items-start gap-4 w-full lg:w-1/2 lg:p-8">
         <h1 className="text-white text-opacity-70 font-roboto text-md font-semibold text-center">
           About Us

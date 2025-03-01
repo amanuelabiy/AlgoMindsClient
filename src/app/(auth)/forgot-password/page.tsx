@@ -4,11 +4,12 @@ import ResetPassword from "@/components/auth/forgotPassword/ResetPassword";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ForgotPasswordType, loginMutationFn } from "@/lib/auth/api";
+import { forgotPasswordMutationFn, ForgotPasswordType } from "@/lib/auth/api";
 import { forgotPasswordSchema } from "@/schema/auth-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -22,6 +23,10 @@ const styles = {
 };
 
 function ForgotPassword() {
+  const params = useSearchParams();
+
+  const email = params.get("email");
+
   const [step, setStep] = useState<number>(1);
 
   const {
@@ -33,14 +38,14 @@ function ForgotPassword() {
     formState: { errors, isSubmitting },
   } = useForm<ForgotPasswordType>({
     defaultValues: {
-      email: "",
-      password: "",
-      verificationCode: "",
+      email: email || "",
     },
     resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const { mutate, isPending } = useMutation({ mutationFn: loginMutationFn });
+  const { mutate, isPending } = useMutation({
+    mutationFn: forgotPasswordMutationFn,
+  });
 
   const handleSendClick = async () => {
     console.log("send click");
@@ -87,6 +92,7 @@ function ForgotPassword() {
                   placeholder="Enter your email"
                   id="email"
                   className={styles.input}
+                  autoComplete="off"
                   {...register("email", { required: "Email is required" })}
                 />
                 {errors.email && (

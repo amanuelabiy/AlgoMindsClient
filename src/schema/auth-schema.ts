@@ -50,6 +50,9 @@ export const verificationEmailSchema = z.object({
 
 export const forgotPasswordSchema = z.object({
   email: emailSchema,
+});
+
+export const resetPasswordSchema = z.object({
   password: passwordSchema,
   verificationCode: verificationCodeSchema,
 });
