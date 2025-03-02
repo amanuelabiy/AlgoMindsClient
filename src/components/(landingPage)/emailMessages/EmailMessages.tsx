@@ -41,6 +41,8 @@ function EmailMessages() {
                 id="email-input"
                 placeholder="Enter your email address here"
                 className="bg-white rounded-[100px] w-full pl-4 border-none outline-none focus:outline-none"
+                autoComplete="off"
+                type="email"
               />
             </label>
           </div>
