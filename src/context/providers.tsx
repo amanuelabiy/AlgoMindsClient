@@ -11,9 +11,5 @@ const PageTransition = dynamic(() => import("@/context/page-transition"), {
 export default function Providers({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
 
-  return (
-    <QueryProvider>
-      <PageTransition key={pathName}>{children}</PageTransition>
-    </QueryProvider>
-  );
+  return <QueryProvider>{children}</QueryProvider>;
 }

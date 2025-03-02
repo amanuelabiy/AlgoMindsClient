@@ -16,7 +16,13 @@ export const confirmPasswordSchema = z
   .trim()
   .min(6, "Confirm Password must contain at least 6 character(s)")
   .max(255);
-export const verificationCodeSchema = z.string().uuid();
+export const verificationCodeSchema = z
+  .string()
+  .uuid("Invalid Verification Code");
+export const verificationCodeSchemaForEmail = z
+  .string()
+  .min(1, "Confirmation token not found")
+  .uuid("Invalid Verification Token");
 export const passwordResetVerificationCode = z
   .string()
   .length(6, "Verification Code must be 6 character(s) long");
@@ -48,7 +54,7 @@ export const loginSchema = z.object({
 });
 
 export const verificationEmailSchema = z.object({
-  code: verificationCodeSchema,
+  code: verificationCodeSchemaForEmail,
 });
 
 export const forgotPasswordSchema = z.object({

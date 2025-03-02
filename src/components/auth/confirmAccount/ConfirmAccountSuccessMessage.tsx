@@ -4,17 +4,17 @@ import React from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { TiArrowRight } from "react-icons/ti";
 
-function ResetPasswordSendMessage() {
+function ConfirmAccountSuccessMessage() {
   return (
     <div className="flex flex-col justify-center items-center gap-4">
       <h1 className="text-[6rem] text-secondaryColor">
         <IoIosCheckmarkCircleOutline />
       </h1>
       <h1 className="text-2xl font-bold text-center max-w-xs sm:max-w-lg">
-        Password Reset Successful!
+        Email Verified!
       </h1>
-      <p className="text-lg text-gray-500">
-        Your password was reset successfully
+      <p className="text-lg text-gray-500 text-center">
+        Your email address was successfully verified.
       </p>
       <Link href="/login" className="w-1/2 mt-4">
         <Button
@@ -28,4 +28,4 @@ function ResetPasswordSendMessage() {
   );
 }
 
-export default ResetPasswordSendMessage;
+export default ConfirmAccountSuccessMessage;

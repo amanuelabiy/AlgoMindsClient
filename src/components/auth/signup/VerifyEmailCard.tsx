@@ -13,7 +13,7 @@ interface VerifyEmailCardProps {
 function VerifyEmailCard({ getValues, hyperLinkStyles }: VerifyEmailCardProps) {
   return (
     <div className="flex flex-col gap-6 py-28 px-4 items-center text-center justify-center">
-      <h1 className="text-6xl font-bold text-center animate-bounce">
+      <h1 className="text-6xl font-bold text-center animate-bounce text-secondaryColor">
         <LuMailCheck />
       </h1>
       <h1 className="font-bold text-center max-w-4xl text-2xl">
