@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const protectedRoutes = ["/sessions"];
 const publicRoutes = [
-  "/",
+  "/login",
   "/signup",
   "/confirm-account",
   "forgot-password",
@@ -15,7 +15,6 @@ export default async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  console.log("hit middleware");
   const accessToken = req.cookies.get("accessToken")?.value;
 
   if (isProtectedRoute && !accessToken) {
@@ -23,7 +22,7 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (isPublicRoute && accessToken) {
-    return NextResponse.redirect(new URL("/home", req.nextUrl));
+    return NextResponse.redirect(new URL("/", req.nextUrl));
   }
 
   return NextResponse.next();
