@@ -52,7 +52,7 @@ function Login() {
           router.replace(`/verify-mfa?email=${data.email}`);
         }
 
-        router.replace("/");
+        router.replace("/problems");
       },
       onError: (error) => {
         setError("root", {
@@ -69,7 +69,7 @@ function Login() {
     errors.root?.message && !errors.email?.message && !errors.password?.message;
 
   return (
-    <div className="flex justify-center items-start min-h-[85vh] pt-16">
+    <div className="flex justify-center items-start min-h-[85vh] pt-14">
       <div className="w-full max-w-md rounded-lg p-6">
         <div className="flex flex-col gap-4 items-center justify-center">
           <h2 className="text-4xl font-bold text-center">Login</h2>

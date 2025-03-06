@@ -1,15 +1,10 @@
-"use client";
-
-import dynamic from "next/dynamic";
+import { AuthProvider } from "./authProvider";
 import QueryProvider from "./query-provider";
-import { usePathname } from "next/navigation";
-
-const PageTransition = dynamic(() => import("@/context/page-transition"), {
-  ssr: false,
-});
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const pathName = usePathname();
-
-  return <QueryProvider>{children}</QueryProvider>;
+  return (
+    <QueryProvider>
+      <AuthProvider>{children}</AuthProvider>
+    </QueryProvider>
+  );
 }
