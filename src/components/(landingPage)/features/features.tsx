@@ -1,5 +1,5 @@
 "use client";
-import FeaturesCarousel from "./featuresCarousel.tsx/FeaturesCarousel";
+import FeaturesCarousel from "./featuresCarousel/FeaturesCarousel";
 
 function Features() {
   return (

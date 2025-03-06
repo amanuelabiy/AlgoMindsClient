@@ -1,5 +1,4 @@
 "use client";
-
 import ResetPassword from "@/components/auth/forgotPassword/ResetPassword";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
