@@ -1,4 +1,5 @@
 import Navbar from "@/components/(landingPage)/navbar/navbar";
+import Footer from "@/components/footer/Footer";
 import React from "react";
 
 function ProblemsPageLayout({
@@ -8,6 +9,7 @@ function ProblemsPageLayout({
     <section>
       <Navbar />
       {children}
+      <Footer />
     </section>
   );
 }
