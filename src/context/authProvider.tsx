@@ -3,7 +3,7 @@
 import useAuth from "@/app/hooks/useAuth";
 import React, { createContext, useContext } from "react";
 
-interface UserPrefrences {
+type UserPrefrences = {
   id: string;
   userId: string;
   enable2FA: boolean;
@@ -11,9 +11,9 @@ interface UserPrefrences {
   twoFactorSecret: string | null;
   createdAt: string;
   updatedAt: string;
-}
+};
 
-interface User {
+type User = {
   id: string;
   firstName: string;
   lastName: string;
@@ -24,7 +24,7 @@ interface User {
   createdAt: string;
   updatedAt: string;
   userPreferences: UserPrefrences;
-}
+};
 
 type AuthContextType = {
   user?: User;

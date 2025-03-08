@@ -13,6 +13,7 @@ import { Label } from "../ui/label";
 import { TiArrowRight } from "react-icons/ti";
 import { IoIosClose } from "react-icons/io";
 import { ChevronDown } from "lucide-react";
+import { getDifficultyColor } from "@/utils/problems/getDifficultyColor";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
@@ -65,19 +66,6 @@ const getDifficultyColorForDropdown = (item: string) => {
       return "text-yellow-500 font-semibold hover:bg-yellow-100 hover:text-yellow-500 data-[highlighted]:bg-yellow-100 data-[highlighted]:text-yellow-500 data-[state=checked]:text-yellow-500";
     case "Hard":
       return "text-red-500 font-semibold hover:bg-red-100 hover:text-red-500 data-[highlighted]:bg-red-100 data-[highlighted]:text-red-500 data-[state=checked]:text-red-500";
-    default:
-      return "";
-  }
-};
-
-const getDifficultyColor = (item: string) => {
-  switch (item) {
-    case "Easy":
-      return "text-green-500";
-    case "Medium":
-      return "text-yellow-500";
-    case "Hard":
-      return "text-red-500";
     default:
       return "";
   }

@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "../ui/table";
 import { Problem } from "./ProblemEntries";
+import { getDifficultyColor } from "@/utils/problems/getDifficultyColor";
 
 interface ProblemsTableProps {
   problems: Problem[];
@@ -32,20 +33,24 @@ function ProblemsTable({ problems }: ProblemsTableProps) {
         <TableBody>
           {problems.map((problem) => (
             <TableRow key={problem.id}>
-              <TableCell className="text-[rgba(44,62,80,0.70)] font-roboto text-sm font-medium leading-normal">
+              <TableCell className="text-[rgba(44,62,80,0.70)] text-sm font-medium leading-normal">
                 {problem.status}
               </TableCell>
-              <TableCell className="text-[rgba(44,62,80,0.70)] font-roboto text-sm font-medium leading-normal">
+              <TableCell className="text-[rgba(44,62,80,0.70)] text-sm font-medium leading-normal">
                 {problem.title}
               </TableCell>
-              <TableCell className="max-w-[10rem] overflow-hidden text-ellipsis whitespace-nowrap text-[rgba(44,62,80,0.70)] font-roboto text-sm font-medium leading-normal">
+              <TableCell className="max-w-[10rem] overflow-hidden text-ellipsis whitespace-nowrap text-[rgba(44,62,80,0.70)] text-sm font-medium leading-normal">
                 {problem.descripition}
               </TableCell>
-              <TableCell className="text-left text-[rgba(44,62,80,0.70)] font-roboto text-sm font-medium leading-normal">
+              <TableCell
+                className={`${getDifficultyColor(
+                  problem.difficulty
+                )} text-left text-sm font-medium leading-normal`}
+              >
                 {problem.difficulty}
               </TableCell>
-              <TableCell className="text-left text-[rgba(44,62,80,0.70)] font-roboto text-sm font-medium leading-normal">
-                {problem.tags}
+              <TableCell className="text-left text-[rgba(44,62,80,0.70)] text-sm font-medium leading-normal max-w-[10rem]">
+                {problem.tags.join(", ")}
               </TableCell>
             </TableRow>
           ))}

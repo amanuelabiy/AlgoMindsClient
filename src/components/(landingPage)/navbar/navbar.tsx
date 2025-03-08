@@ -1,10 +1,21 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+"use client";
 
-import React from "react";
+import { Button } from "@/components/ui/button";
+import { useAuthContext } from "@/context/authProvider";
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
 import { IoMenu as MobileMenu } from "react-icons/io5";
 
 function Navbar() {
+  const { user, isLoading } = useAuthContext();
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const displayButtons = !isLoading && mounted;
+
   return (
     <nav className="flex flex-row w-full bg-primaryColor h-20">
       <div className="flex flex-row w-full justify-between items-center p-8 md:px-16 md:mx-24">
@@ -22,18 +33,29 @@ function Navbar() {
         </Button>
 
         {/**Sign Up and Login Buttons Hidden on Larger Screens*/}
-        <div className="hidden md:flex flex-row gap-4">
-          <Link href="/login">
-            <Button className="w-28 h-[25px] bg-transparent p-5 text-[#F5F5F5] font-roboto text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none">
-              Login
-            </Button>
-          </Link>
-          <Link href="/signup">
-            <Button className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] font-roboto text-md font-medium leading-[20px] normal-case button-transform">
-              Sign Up
-            </Button>
-          </Link>
-        </div>
+        {displayButtons && (
+          <div className="hidden md:flex flex-row gap-4">
+            {user ? (
+              <Button className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] font-roboto text-md font-medium leading-[20px] normal-case button-transform">
+                Logout
+              </Button>
+            ) : (
+              <>
+                {" "}
+                <Link href="/login">
+                  <Button className="w-28 h-[25px] bg-transparent p-5 text-[#F5F5F5] font-roboto text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none">
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] font-roboto text-md font-medium leading-[20px] normal-case button-transform">
+                    Sign Up
+                  </Button>
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </nav>
   );
