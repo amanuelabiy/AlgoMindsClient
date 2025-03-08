@@ -125,7 +125,7 @@ function FilterParameters() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-4 md:flex-row">
-        <div className="flex flex-row justify-center items-center gap-2 md:gap-4">
+        <div className="sm:flex sm:flex-row sm:justify-center sm:items-center gap-2 md:gap-4 grid grid-cols-2">
           {" "}
           {filterItems.map((filter) => (
             <DropdownMenu

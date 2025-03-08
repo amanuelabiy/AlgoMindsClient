@@ -1,8 +1,9 @@
 import React from "react";
-import { Card, CardHeader } from "../ui/card";
+import { Card, CardContent, CardHeader } from "../ui/card";
 import FilterParameters from "./FilterParameters";
+import ProblemsTable from "./ProblemsTable";
 
-interface Problem {
+export interface Problem {
   id: number;
   status: string;
   title: string;
@@ -17,11 +18,14 @@ interface ProblemEntriesProps {
 
 function ProblemEntries({ problems }: ProblemEntriesProps) {
   return (
-    <Card>
+    <Card className="w-full max-w-screen-lg overflow-hidden">
       <CardHeader>
-        {/*Filter Parameters */}
         <FilterParameters />
       </CardHeader>
+
+      <CardContent className="w-full">
+        <ProblemsTable problems={problems} />
+      </CardContent>
     </Card>
   );
 }

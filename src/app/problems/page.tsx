@@ -46,7 +46,7 @@ function ProblemsPage() {
   //TODO: Add queryFn to fetch problems
 
   return (
-    <div className="pt-6 bg-neutralLightColor h-screen">
+    <div className="pt-6 bg-neutralLightColor min-h-screen">
       <header className="flex flex-col items-center gap-4 justify-center text-center">
         <h1 className="text-[rgba(44,62,80,0.70)] text-xl font-semibold leading-normal">
           Problems
@@ -56,7 +56,7 @@ function ProblemsPage() {
           <span className="text-secondaryColor">Coding</span> Problems
         </h1>
       </header>
-      <div className="flex flex-col mt-4 gap-4 items-center justify-center">
+      <div className="flex flex-col mt-4 gap-4 items-center justify-center w-full">
         <ProblemEntries problems={sampleProblems} />
         <StreakCalendar />
         <ProblemStats />
