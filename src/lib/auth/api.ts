@@ -28,6 +28,8 @@ export const loginMutationFn = async (data: LoginType) =>
 export const registerMutationFn = async (data: RegisterType) =>
   await API.post("/auth/register", data);
 
+export const logoutMutationFn = async () => await API.post("/auth/logout");
+
 export const verifyEmailMutationFn = async (data: VerifyEmailType) =>
   await API.post("/auth/verify/email", data);
 

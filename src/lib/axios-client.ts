@@ -1,4 +1,6 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import queryClient from "./queryClient";
 
 const options = {
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -10,6 +12,16 @@ const API = axios.create(options);
 export const APIRefresh = axios.create(options);
 APIRefresh.interceptors.response.use((response) => response);
 
+const isTokenExpired = (token: string | undefined | null): boolean => {
+  if (!token) return true; // If no token exists, consider it expired
+  try {
+    const decoded: { exp: number } = jwtDecode(token);
+    return decoded.exp * 1000 < Date.now(); // Convert exp to milliseconds
+  } catch (error) {
+    return true; // If decoding fails, consider the token expired
+  }
+};
+
 API.interceptors.response.use(
   (response) => {
     return response;
@@ -20,9 +32,10 @@ API.interceptors.response.use(
     if (data.errorCode === "AUTH_TOKEN_NOT_FOUND" && status === 401) {
       try {
         await APIRefresh.get("/auth/refresh");
+
         return APIRefresh(error.config);
       } catch (error) {
-        window.location.href = "/";
+        queryClient.clear();
       }
     }
     return Promise.reject({
@@ -30,4 +43,6 @@ API.interceptors.response.use(
     });
   }
 );
+
+export { isTokenExpired };
 export default API;

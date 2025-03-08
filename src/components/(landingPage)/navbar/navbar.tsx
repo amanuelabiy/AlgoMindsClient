@@ -2,31 +2,82 @@
 
 import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/context/authProvider";
+import { logoutMutationFn } from "@/lib/auth/api";
+import { isTokenExpired, APIRefresh } from "@/lib/axios-client";
+import queryClient from "@/lib/queryClient";
+import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { IoMenu as MobileMenu } from "react-icons/io5";
 
 function Navbar() {
-  const { user, isLoading } = useAuthContext();
+  const { user, isLoading, refetch } = useAuthContext();
   const [mounted, setMounted] = useState<boolean>(false);
+  const router = useRouter();
+
+  const { mutate: logout } = useMutation({
+    mutationFn: logoutMutationFn,
+    onSettled: () => {
+      queryClient.clear(); // Clear cache immediately
+      sessionStorage.clear();
+      localStorage.clear();
+    },
+    onSuccess: async () => {
+      refetch();
+      router.replace("/");
+    },
+  });
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleLogoClick = async (e: React.MouseEvent) => {
+    if (!user) {
+      router.push("/");
+    }
+
+    e.preventDefault();
+
+    const accessToken = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("accessToken="))
+      ?.split("=")[1];
+
+    if (isTokenExpired(accessToken)) {
+      try {
+        await APIRefresh.get("/auth/refresh");
+        await refetch();
+        router.push("/problems");
+      } catch (error) {
+        console.log("Failed to refresh token", error);
+        router.push("/");
+      }
+    } else {
+      router.push("/problems");
+    }
+  };
+
+  const handleLogoutClick = async () => {
+    logout();
+  };
 
   const displayButtons = !isLoading && mounted;
 
   return (
     <nav className="flex flex-row w-full bg-primaryColor h-20">
       <div className="flex flex-row w-full justify-between items-center p-8 md:px-16 md:mx-24">
-        <Link href="/">
-          <h1 className="text-white font-roboto text-2xl font-medium button-transform hover:cursor-pointer hover:shadow-none">
-            Algo
-            <span className="font-roboto text-2xl font-medium text-secondaryColor">
-              Rivals
-            </span>
-          </h1>
-        </Link>
+        <h1
+          onClick={handleLogoClick}
+          className="text-white font-roboto text-2xl font-medium button-transform hover:cursor-pointer hover:shadow-none"
+        >
+          Algo
+          <span className="font-roboto text-2xl font-medium text-secondaryColor">
+            Rivals
+          </span>
+        </h1>
+
         {/*Mobile Navbar hidden on Larger Screens */}
         <Button className="bg-primaryColor cursor-pointer shadow-none rounded-md button-transform border-none hover:bg-white/10 md:hidden">
           <MobileMenu className="w-6 h-6" />
@@ -36,7 +87,10 @@ function Navbar() {
         {displayButtons && (
           <div className="hidden md:flex flex-row gap-4">
             {user ? (
-              <Button className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] font-roboto text-md font-medium leading-[20px] normal-case button-transform">
+              <Button
+                onClick={handleLogoutClick}
+                className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] font-roboto text-md font-medium leading-[20px] normal-case button-transform"
+              >
                 Logout
               </Button>
             ) : (
