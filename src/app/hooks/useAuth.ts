@@ -9,8 +9,8 @@ const useAuth = () => {
     queryFn: getUserSessionQueryFn,
     staleTime: Infinity,
     retry: false,
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   return query;
