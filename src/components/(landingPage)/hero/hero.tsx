@@ -15,10 +15,11 @@ function Hero() {
           <span className="text-lighterBlue"> Algorithms</span>, The Fun Way!
         </h1>
         <p className="text-white text-base font-roboto font-normal leading-normal text-center lg:text-left lg:max-w-2xl">
-          Engage in real-time coding challenges and compete with others in a
-          thrilling, competitive environment. Test your skills, climb the
-          leaderboard, and have fun solving problems in a dynamic, fast-paced
-          setting!
+          Master Data Structures and Algorithms with AI-powered guidance. Get
+          real-time feedback, personalized problem recommendations, and
+          AI-driven mock interviews to sharpen your skills. Level up your coding
+          prep, track your progress, and gain the confidence to ace technical
+          interviews!
         </p>
         <div>
           <Link href="/signup">

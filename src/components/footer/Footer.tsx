@@ -33,9 +33,9 @@ const styles = {
 
 function Footer() {
   return (
-    <div className="flex gap-4 md:flex-row flex-col w-full bg-primaryColor md:h-20 h-auto px-4 py-16 md:py-4 md:px-16 md:justify-between md:items-center">
+    <div className="flex gap-4 md:flex-row flex-col w-full bg-primaryColor md:h-20 h-auto px-4 py-16 md:py-4 md:px-16 md:justify-between md:items-center max-w-full">
       <h1 className={styles.footerText}>
-        &copy; 2025 AlgoRivals. All Rights Reserved.{" "}
+        &copy; 2025 AlgoAI. All Rights Reserved.{" "}
       </h1>
       <ul className={styles.footerText}>
         <Link href="/contact" className="mb-4 md:mb-0">

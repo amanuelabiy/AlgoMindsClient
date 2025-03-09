@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useAuthContext } from "@/context/authProvider";
 import { loginMutationFn, LoginType } from "@/lib/auth/api";
 import { loginSchema } from "@/schema/auth-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +23,7 @@ const styles = {
 };
 
 function Login() {
+  const { setUser } = useAuthContext();
   const router = useRouter();
 
   const {
@@ -51,7 +53,7 @@ function Login() {
         if (response.data.mfaRequired) {
           router.replace(`/verify-mfa?email=${data.email}`);
         }
-
+        setUser(response.data);
         router.replace("/problems");
       },
       onError: (error) => {
@@ -74,7 +76,7 @@ function Login() {
         <div className="flex flex-col gap-4 items-center justify-center">
           <h2 className="text-4xl font-bold text-center">Login</h2>
           <p className="text-gray-500 text-center max-w-4xl">
-            Welcome Back to AlgoRivals 👋
+            Welcome Back to AlgoAI 👋
           </p>
         </div>
         <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
@@ -147,10 +149,8 @@ function Login() {
           <div className="flex flex-col gap-2 items-center justify-center md:justify-start mt-6">
             <p className="text-center md:text-left text-sm text-gray-500">
               If you need help, please contact{" "}
-              <Link href="mailto:support@algorivals.com.">
-                <span className={styles.hyperlink}>
-                  support@algorivals.com.
-                </span>
+              <Link href="mailto:support@algoai.com.">
+                <span className={styles.hyperlink}>support@algoai.com.</span>
               </Link>
             </p>
 

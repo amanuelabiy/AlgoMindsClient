@@ -19,32 +19,38 @@ function AboutUs() {
         <ul className="text-white text-opacity-70 font-roboto lg:text-lg text-2xl font-medium p-8 lg:p-0 text-center lg:text-left">
           <li className="mb-4">
             <span className="text-white font-bold text-opacity-100">
-              ✅ What is AlgoRivals?
+              ✅ What is AlgoAI?
             </span>{" "}
-            A competitive coding platform where software engineers can prepare
-            for technical interviews in a fun and engaging way.
+            An AI-powered interview prep platform that helps software engineers
+            master Data Structures and Algorithims with real-time AI guidance,
+            creating personalized experience with every problem solved.
           </li>
           <li className="mb-4">
             <span className="text-white font-bold text-opacity-100">
               ✅ Our Mission:
             </span>{" "}
-            To transform coding interview preparation from an isolated, boring
-            task to an engaging, social experience.
+            To revolutionize coding interview preparation by leveraging AI for
+            intelligent feedback, adaptive learning, and interactive mock
+            interviews—making interview prep smarter, faster, and more
+            effective.
           </li>
           <li className="mb-4">
             <span className="text-white font-bold text-opacity-100">
               ✅ What We Offer:
             </span>{" "}
-            Real-time multiplayer coding challenges, integrated problem
-            repository, interactive code editor, live leaderboards and rankings!
+            AI-driven code explanations, real-time debugging assistance,
+            AI-powered mock technical interviews, personalized problem
+            recommendations, and interactive leaderboards to track your
+            progress.
           </li>
           <li>
             <span className="text-white font-bold text-opacity-100">
               ✅ Why Sign Up?
-            </span>{" "}
-            Take your coding skills to the next level by competing with friends,
-            tracking your progress, and mastering algorithms—all in a dynamic,
-            interactive environment designed to make learning fun and effective.
+            </span>
+            {"  "}
+            Supercharge your interview prep with AI-driven insights, challenge
+            yourself with curated problem sets, and gain the confidence to crack
+            technical interviews at top companies—efficiently and effectively.
           </li>
         </ul>
         <Link

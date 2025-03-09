@@ -32,7 +32,7 @@ function ProblemsTable({ problems }: ProblemsTableProps) {
         </TableHeader>
         <TableBody>
           {problems.map((problem) => (
-            <TableRow key={problem.id}>
+            <TableRow className="hover:cursor-pointer" key={problem.id}>
               <TableCell className="text-[rgba(44,62,80,0.70)] text-sm font-medium leading-normal">
                 {problem.status}
               </TableCell>

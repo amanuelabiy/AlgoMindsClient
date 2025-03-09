@@ -31,11 +31,12 @@ type User = {
 };
 
 type AuthContextType = {
-  user?: User;
+  user?: User | null;
   error: any;
   isLoading: boolean;
   isFetching: boolean;
   refetch: () => void;
+  setUser: (user: User | null) => void;
 };
 
 const protectedRoutes = ["/sessions", "/problems", "/settings"];
@@ -54,17 +55,20 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { data, error, isLoading, isFetching, refetch } = useAuth();
+  const [user, setUser] = useState<User | null>(null);
+  const { data: clientUser, error, isLoading, isFetching, refetch } = useAuth();
   const [refreshLoading, setRefreshLoading] = useState(false);
   const [hasRefreshed, setHasRefreshed] = useState(false);
-  const user = data?.data?.user;
   const router = useRouter();
+  const [pathname, setPathname] = useState<string | null>(null);
+
+  const theClientUser = clientUser?.data.user;
 
   useEffect(() => {
-    console.log("Auth State updated");
-  }, [user]);
-
-  const [pathname, setPathname] = useState<string | null>(null);
+    if (clientUser) {
+      setUser(theClientUser);
+    }
+  }, [clientUser]);
 
   useEffect(() => {
     setPathname(window.location.pathname);
@@ -104,15 +108,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const currentPath = window.location.pathname;
 
     if (!isLoading && !refreshLoading) {
-      if (!user && protectedRoutes.includes(currentPath)) {
+      if (!theClientUser && protectedRoutes.includes(currentPath)) {
         router.replace("/");
-      } else if (user && publicRoutes.includes(currentPath)) {
+      } else if (theClientUser && publicRoutes.includes(currentPath)) {
         router.replace("/problems");
       }
     }
-  }, [user, isLoading, refreshLoading, router]);
-
-  console.log("Pathname", pathname);
+  }, [theClientUser, isLoading, refreshLoading, router]);
 
   const SkeletonComponent = pathname
     ? loadingSkeletons[pathname] ?? DefaultSkeleton
@@ -124,7 +126,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <AuthContext.Provider
-      value={{ user, error, isLoading, isFetching, refetch }}
+      value={{ user, error, isLoading, isFetching, refetch, setUser }}
     >
       {children}
     </AuthContext.Provider>

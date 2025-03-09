@@ -66,8 +66,8 @@ function EmailMessages() {
           </h1>
           <p className="text-[rgba(44,62,80,0.80)] font-roboto text-sm font-medium text-center">
             {" "}
-            Be the first to experience AlgoRivals! Sign up now to get early
-            access and exclusive updates!{" "}
+            Be the first to experience AlgoAI! Sign up now to get early access
+            and exclusive updates!{" "}
           </p>
           <form className="relative w-full" onSubmit={handleSubmit(onSubmit)}>
             {/*Disables blue color on autofill */}
