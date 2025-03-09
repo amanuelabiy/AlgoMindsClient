@@ -111,7 +111,7 @@ function FilterParameters() {
   const combinedFilters = Object.values(selectedFilters).flat();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 overflow-auto">
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="sm:flex sm:flex-row sm:justify-center sm:items-center gap-2 md:gap-4 grid grid-cols-2">
           {" "}

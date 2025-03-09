@@ -72,7 +72,7 @@ function Navbar() {
   const displayButtons = !isLoading && mounted;
 
   return (
-    <nav className="flex flex-row w-full bg-primaryColor h-20 max-w-full overflow-auto">
+    <nav className="flex flex-row w-full bg-primaryColor h-20 max-w-full">
       <div className="flex flex-row w-full justify-between items-center p-8 md:px-16 md:mx-24">
         <h1
           onClick={handleLogoClick}

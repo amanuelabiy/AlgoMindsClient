@@ -1,6 +1,6 @@
 import ProblemEntries from "@/components/problems/ProblemEntries";
 import ProblemStats from "@/components/problems/ProblemStats";
-import StreakCalendar from "@/components/problems/StreakCalendar";
+import StreakCounter from "@/components/problems/StreakCalendar";
 import React from "react";
 
 const sampleProblems = [
@@ -56,10 +56,12 @@ function ProblemsPage() {
           <span className="text-secondaryColor">Coding</span> Problems
         </h1>
       </header>
-      <div className="flex flex-col mt-4 gap-4 items-center justify-center w-full">
+      <div className="flex flex-col mt-4 gap-4 items-center justify-center w-full md:flex-row px-24">
         <ProblemEntries problems={sampleProblems} />
-        <StreakCalendar />
-        <ProblemStats />
+        <div className="flex flex-col mt-4 gap-4 items-center justify-center">
+          <StreakCounter />
+          <ProblemStats />
+        </div>
       </div>
     </div>
   );
