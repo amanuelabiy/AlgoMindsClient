@@ -1,12 +1,14 @@
-import { getProblemsQueryFn } from "@/lib/problems/api";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { getAllProblemsQueryFn } from "@/lib/problems/api";
+import { useQuery } from "@tanstack/react-query";
 
 const useFetchProblems = () => {
-  const query = useInfiniteQuery({
+  const query = useQuery({
     queryKey: ["problems"],
-    queryFn: getProblemsQueryFn,
-    initialPageParam: 0,
-    getNextPageParam: (lastPage) => lastPage.data.nextCursor || null, // Set next cursor
+    queryFn: getAllProblemsQueryFn,
+    staleTime: Infinity,
+    retry: false,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   return query;

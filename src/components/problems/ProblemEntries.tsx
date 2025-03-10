@@ -2,21 +2,14 @@ import React from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import FilterParameters from "./FilterParameters";
 import ProblemsTable from "./ProblemsTable";
-
-export interface Problem {
-  id: number;
-  status: string;
-  title: string;
-  descripition: string;
-  difficulty: string;
-  tags: string[];
-}
+import { SearchParams } from "@/app/problems/page";
+import { Problem } from "@/types/problems";
 
 interface ProblemEntriesProps {
-  problems: Problem[];
+  searchParams: SearchParams;
 }
 
-function ProblemEntries({ problems }: ProblemEntriesProps) {
+function ProblemEntries({ searchParams }: ProblemEntriesProps) {
   return (
     <Card className="w-full max-w-screen-lg overflow-hidden">
       <CardHeader>
@@ -24,7 +17,7 @@ function ProblemEntries({ problems }: ProblemEntriesProps) {
       </CardHeader>
 
       <CardContent className="w-full">
-        <ProblemsTable problems={problems} />
+        <ProblemsTable searchParams={searchParams} />
       </CardContent>
     </Card>
   );
