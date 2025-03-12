@@ -1,7 +1,7 @@
 "use client";
 
 import useAuth from "@/app/hooks/useAuth";
-import DefaultSkeleton from "@/components/loadingStates/DefaultSkeleton";
+import DefaultSkeleton from "@/components/loadingStates/Landing/DefaultSkeleton";
 import { APIRefresh, isTokenExpired } from "@/lib/axios-client";
 import { loadingSkeletons } from "@/utils/loading/loadingSkeleton";
 import { useRouter } from "next/navigation";

@@ -1,6 +1,6 @@
 import React from "react";
-import NavbarSkeleton from "./NavbarSkeleton";
-import { Skeleton } from "../ui/skeleton";
+import NavbarSkeleton from "../Landing/NavbarSkeleton";
+import { Skeleton } from "../../ui/skeleton";
 
 function ProblemSkeleton() {
   return (

@@ -1,14 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import FilterParameters from "./FilterParameters";
 import ProblemsTable from "./ProblemsTable";
-import { SearchParams } from "@/app/problems/page";
+import ProblemsTableLoading from "../loadingStates/Problems/ProblemsTableLoading";
 
-interface ProblemEntriesProps {
-  searchParams: SearchParams;
-}
-
-function ProblemEntries({ searchParams }: ProblemEntriesProps) {
+function ProblemEntries() {
   return (
     <Card className="w-full max-w-screen-lg overflow-hidden">
       <CardHeader>
@@ -16,7 +12,9 @@ function ProblemEntries({ searchParams }: ProblemEntriesProps) {
       </CardHeader>
 
       <CardContent className="w-full">
-        <ProblemsTable searchParams={searchParams} />
+        <Suspense fallback={<ProblemsTableLoading />}>
+          <ProblemsTable />
+        </Suspense>
       </CardContent>
     </Card>
   );

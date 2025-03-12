@@ -13,14 +13,27 @@ import { PROBLEM_AMOUNTS } from "@/utils/problems/constants";
 
 interface ProblemAmountDropdownProps {
   perPage: number;
-  setPerPage: (perPage: number) => void;
+  setPerPage: React.Dispatch<React.SetStateAction<number>>;
+  currentPage: number;
+  totalPages: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  totalCount: number;
 }
 
 function ProblemAmountDropdown({
   perPage,
+  currentPage,
+  totalPages,
   setPerPage,
+  setPage,
+  totalCount,
 }: ProblemAmountDropdownProps) {
   const [openDropdown, setOpenDropdown] = useState(false);
+
+  const handlePerPageChange = (newPerPage: number) => {
+    setPerPage(newPerPage);
+  };
+
   return (
     <DropdownMenu onOpenChange={(open) => setOpenDropdown(open)}>
       <DropdownMenuTrigger asChild>
@@ -38,7 +51,7 @@ function ProblemAmountDropdown({
           <DropdownMenuCheckboxItem
             key={amount}
             checked={perPage === amount}
-            onClick={() => setPerPage(amount)}
+            onClick={() => handlePerPageChange(amount)}
             className="font-semibold hover:cursor-pointer"
           >
             {`${amount} / page`}

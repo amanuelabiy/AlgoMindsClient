@@ -139,6 +139,8 @@ function Navbar() {
             )}
           </div>
         )}
+
+        <Button onClick={handleLogoutClick}>Logout</Button>
       </div>
     </nav>
   );

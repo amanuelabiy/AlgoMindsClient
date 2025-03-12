@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -12,7 +12,6 @@ import {
 
 import { getDifficultyColor } from "@/utils/problems/getDifficultyColor";
 import ProblemsPagination from "./ProblemsPagination";
-import { SearchParams } from "@/app/problems/page";
 import useFetchProblems from "@/app/hooks/useFetchProblems";
 import {
   difficultyMap,
@@ -21,14 +20,19 @@ import {
 import { Problem } from "@/types/problems";
 import { PROBLEMS_PER_PAGE } from "@/utils/problems/constants";
 import ProblemAmountDropdown from "./ProblemAmountDropdown";
+import ProblemsTableLoading from "../loadingStates/Problems/ProblemsTableLoading";
+import { useRouter, useSearchParams } from "next/navigation";
 
-interface ProblemsTableProps {
-  searchParams: SearchParams;
-}
+function ProblemsTable() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-function ProblemsTable({ searchParams }: ProblemsTableProps) {
-  const [page, setPage] = useState(1);
+  // Get the current page from the URL or default to 1
+  const queryPage = Number(searchParams.get("page")) || 1;
+
+  const [page, setPage] = useState(queryPage);
   const [perPage, setPerPage] = useState(PROBLEMS_PER_PAGE);
+  const [isPageChanging, setIsPageChanging] = useState(false);
 
   // Fetch paginated problems
   const { data, isLoading, error } = useFetchProblems(page, perPage);
@@ -36,14 +40,38 @@ function ProblemsTable({ searchParams }: ProblemsTableProps) {
   // Derived state from the query
   const totalCount = data?.data.totalCount ?? 0;
   const totalPages = data?.data.totalPages ?? 1;
+  const currentPage = data?.data.page ?? 1;
+
+  // Sync state with URL when query params change
+  useEffect(() => {
+    if (queryPage !== page) {
+      setPage(queryPage);
+    }
+  }, [queryPage]);
+
+  // Update the URL when the page changes (only keeps `?page=N`)
+  useEffect(() => {
+    router.replace(`/problems?page=${page}`, { scroll: false });
+  }, [page, router]);
+
+  useEffect(() => {
+    if (page > totalPages) {
+      setIsPageChanging(true);
+      setPage(totalPages);
+    } else {
+      setIsPageChanging(false);
+    }
+  }, [page, totalPages]);
 
   // Loading State
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading || isPageChanging) return <ProblemsTableLoading />;
 
   // Error State
   if (error) return <div>Error: {error.message}</div>;
 
   const problems: Problem[] = data?.data.problems || [];
+
+  console.log("data", data);
 
   return (
     <div className="overflow-x-auto w-full p-4">
@@ -95,8 +123,19 @@ function ProblemsTable({ searchParams }: ProblemsTableProps) {
         </TableBody>
       </Table>
       <div className="flex flex-row justify-between items-center mt-10 border-t border-t-[rgba(0,0,0,0.10)] pt-4 w-full px-2">
-        <ProblemAmountDropdown perPage={perPage} setPerPage={setPerPage} />
-        <ProblemsPagination />
+        <ProblemAmountDropdown
+          perPage={perPage}
+          setPerPage={setPerPage}
+          currentPage={page}
+          totalPages={totalPages}
+          setPage={setPage}
+          totalCount={totalCount}
+        />
+        <ProblemsPagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setPage={setPage}
+        />
       </div>
     </div>
   );
