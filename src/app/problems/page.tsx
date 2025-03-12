@@ -1,7 +1,7 @@
 import ProblemEntries from "@/components/problems/ProblemEntries";
 import ProblemStats from "@/components/problems/ProblemStats";
 import StreakCounter from "@/components/problems/StreakCalendar";
-import { ROWS_PER_PAGE } from "@/utils/problems/constants";
+import { PROBLEMS_PER_PAGE } from "@/utils/problems/constants";
 import React from "react";
 
 const sampleProblems = [
@@ -152,18 +152,16 @@ const sampleProblems = [
 ];
 
 export interface SearchParams {
-  cursor?: string;
-  limit?: number;
+  page?: number;
 }
 
 interface ProblemsPageProps {
   searchParams: SearchParams;
 }
 
-function ProblemsPage({ searchParams }: ProblemsPageProps) {
+function ProblemsPage({ searchParams = {} }: ProblemsPageProps) {
   const safeSearchParams = {
-    cursor: searchParams.cursor ?? "0",
-    limit: Number(searchParams.limit) || ROWS_PER_PAGE,
+    page: Number(searchParams.page) || 1,
   };
 
   return (

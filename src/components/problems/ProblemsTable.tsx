@@ -5,7 +5,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -20,31 +19,34 @@ import {
   statusMap,
 } from "@/utils/problems/mapDifficultyAndStatus";
 import { Problem } from "@/types/problems";
-import { ROWS_PER_PAGE } from "@/utils/problems/constants";
+import { PROBLEMS_PER_PAGE } from "@/utils/problems/constants";
+import ProblemAmountDropdown from "./ProblemAmountDropdown";
 
 interface ProblemsTableProps {
   searchParams: SearchParams;
 }
 
 function ProblemsTable({ searchParams }: ProblemsTableProps) {
-  const { data, isLoading, error } = useFetchProblems();
-  const [count, setCount] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(PROBLEMS_PER_PAGE);
 
+  // Fetch paginated problems
+  const { data, isLoading, error } = useFetchProblems(page, perPage);
+
+  // Derived state from the query
+  const totalCount = data?.data.totalCount ?? 0;
+  const totalPages = data?.data.totalPages ?? 1;
+
+  // Loading State
   if (isLoading) return <div>Loading...</div>;
 
+  // Error State
   if (error) return <div>Error: {error.message}</div>;
 
   const problems: Problem[] = data?.data.problems || [];
 
-  const totalPages = Math.ceil(problems.length / ROWS_PER_PAGE);
-
-  const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
-  const endIndex = startIndex + ROWS_PER_PAGE;
-  const paginatedProblems = problems.slice(startIndex, endIndex);
-
   return (
-    <div className="overflow-x-auto w-full">
+    <div className="overflow-x-auto w-full p-4">
       {" "}
       <Table>
         <TableHeader>
@@ -57,7 +59,7 @@ function ProblemsTable({ searchParams }: ProblemsTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {paginatedProblems.map((problem) => (
+          {problems.map((problem) => (
             <TableRow className="hover:cursor-pointer" key={problem.id}>
               <TableCell className="text-[rgba(44,62,80,0.70)] text-sm font-medium leading-normal">
                 {
@@ -92,11 +94,10 @@ function ProblemsTable({ searchParams }: ProblemsTableProps) {
           ))}
         </TableBody>
       </Table>
-      <ProblemsPagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div className="flex flex-row justify-between items-center mt-10 border-t border-t-[rgba(0,0,0,0.10)] pt-4 w-full px-2">
+        <ProblemAmountDropdown perPage={perPage} setPerPage={setPerPage} />
+        <ProblemsPagination />
+      </div>
     </div>
   );
 }

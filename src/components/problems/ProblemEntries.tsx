@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader } from "../ui/card";
 import FilterParameters from "./FilterParameters";
 import ProblemsTable from "./ProblemsTable";
 import { SearchParams } from "@/app/problems/page";
-import { Problem } from "@/types/problems";
 
 interface ProblemEntriesProps {
   searchParams: SearchParams;

@@ -14,47 +14,20 @@ interface ProblemsPaginationProps {
   onPageChange: (page: number) => void;
 }
 
-function ProblemsPagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: ProblemsPaginationProps) {
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
-    }
-  };
+function ProblemsPagination() {
   return (
-    <Pagination>
+    <Pagination className="ml-auto">
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious
-            onClick={handlePrevious}
-            aria-disabled={currentPage === 1}
-            className={currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}
-          />
+          <PaginationPrevious />
         </PaginationItem>
 
         <PaginationItem>
-          <PaginationLink isActive>
-            Page {currentPage} of {totalPages}
-          </PaginationLink>
+          <PaginationLink isActive></PaginationLink>
         </PaginationItem>
 
         <PaginationItem>
-          <PaginationNext
-            onClick={handleNext}
-            aria-disabled={currentPage === totalPages}
-            className={
-              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-            }
-          />
+          <PaginationNext />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
