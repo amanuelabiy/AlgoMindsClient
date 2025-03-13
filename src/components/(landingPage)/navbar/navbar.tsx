@@ -76,10 +76,10 @@ function Navbar() {
       <div className="flex flex-row w-full justify-between items-center p-8 md:px-16 md:mx-24">
         <h1
           onClick={handleLogoClick}
-          className="text-white font-roboto text-2xl font-medium button-transform hover:cursor-pointer hover:shadow-none"
+          className="text-black text-[36px] font-chakra font-bold leading-normal shadow-md button-transform hover:cursor-pointer hover:shadow-none"
         >
           Algo
-          <span className="font-roboto text-2xl font-medium text-secondaryColor">
+          <span className="text-[36px] font-chakra font-bold leading-normal shadow-md text-secondaryColor">
             Ai
           </span>
         </h1>
@@ -139,8 +139,6 @@ function Navbar() {
             )}
           </div>
         )}
-
-        <Button onClick={handleLogoutClick}>Logout</Button>
       </div>
     </nav>
   );
