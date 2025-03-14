@@ -11,6 +11,7 @@ import { CODE_EDITOR_ICONS } from "@/utils/codeEditor/icons";
 import { Button } from "@/components/ui/button";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import LandingCodeEditorSkeleton from "@/components/loadingStates/Landing/LandingCodeEditorSkeleton";
 
 function LandingPageCodeEditor() {
   const [language, setLanguage] = useState<Language>("javascript");
@@ -59,7 +60,7 @@ function LandingPageCodeEditor() {
   console.log("editorLoading", editorLoading);
 
   if (editorLoading) {
-    return <div>Loading...</div>;
+    return <LandingCodeEditorSkeleton />;
   }
 
   return (

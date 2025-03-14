@@ -3,12 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import LandingPageCodeEditor from "../landingEditor/LandingPageCodeEditor";
+import motion from "framer-motion";
 
 function Hero() {
   return (
     <div className="flex flex-col lg:flex-row lg:gap-8 gap-20 justify-center items-center min-h-screen w-full bg-cover bg-center bg-no-repeat p-4 lg:px-36 lg:py-20">
       {/* Left Text Section */}
-      <div className="flex flex-col gap-6 justify-center lg:items-start items-center mt-12 relative lg:top-[-4rem]">
+      <motion.div className="flex flex-col gap-6 justify-center lg:items-start items-center mt-12 relative lg:top-[-4rem]">
         <h1 className="text-black text-[46px] font-bold leading-normal text-center lg:text-left lg:max-w-[54rem]">
           Practice <span className="text-lighterBlue">Data Structures </span> &
           <span className="text-lighterBlue"> Algorithms</span>, with{" "}
@@ -47,7 +48,7 @@ function Hero() {
             />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Right Image Section */}
       <div className="flex justify-center items-center lg:w-[85%] w-full relative lg:top-[-4rem] lg:right-[-4rem]">
