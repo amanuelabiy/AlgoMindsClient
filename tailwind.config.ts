@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        "custom-lg": "1225px",
+      },
       animation: {
         "sway-right": "swayRight 1.2s infinite ease-in-out",
       },

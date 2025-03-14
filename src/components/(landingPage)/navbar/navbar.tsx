@@ -16,6 +16,8 @@ import { CiSettings } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
+import { container } from "@/utils/framerMotion/container";
 
 function Navbar() {
   const { user, isLoading, refetch, setUser } = useAuthContext();
@@ -73,8 +75,18 @@ function Navbar() {
 
   const displayButtons = !isLoading && mounted;
 
+  const isLanding = pathname === "/";
+
+  const displayGuestNavLinks = !user && displayButtons && isLanding;
   return (
-    <nav className="flex flex-row w-full h-28 max-w-full">
+    <motion.nav
+      variants={isLanding ? container(0) : undefined}
+      initial="hidden"
+      animate="visible"
+      className={`flex flex-row w-full ${
+        isLanding ? "h-28" : "h-20 py-8"
+      } max-w-full`}
+    >
       <div className="flex flex-row w-full justify-between items-center p-8 md:px-16 md:mx-24">
         <h1
           onClick={handleLogoClick}
@@ -130,28 +142,36 @@ function Navbar() {
               </div>
             ) : (
               <div className="flex flex-row justify-between items-center">
-                <div className="flex flex-row justify-between items-center mr-[8rem]">
-                  {GUEST_NAV_LINKS.map((link) => (
-                    <Link href={link.href} key={link.label}>
-                      <Button
-                        className={`w-24 h-[25px] text-[#492B2B] bg-transparent p-5 text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
-                      >
-                        {link.label}
+                <div className="flex flex-row justify-between items-center ml-[4rem] mr-[4rem] custom-lg:ml-[0rem] custom-lg:mr-[8rem]">
+                  {displayGuestNavLinks ? (
+                    <>
+                      {GUEST_NAV_LINKS.map((link) => (
+                        <Link href={link.href} key={link.label}>
+                          <Button
+                            className={`w-24 h-[25px] text-[#492B2B] bg-transparent p-5 text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
+                          >
+                            {link.label}
+                          </Button>
+                        </Link>
+                      ))}
+                    </>
+                  ) : null}
+                </div>{" "}
+                {isLanding ? (
+                  <>
+                    <Link href="/signup">
+                      <Button className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] text-md font-medium text-sm normal-case button-transform">
+                        Get Started
                       </Button>
                     </Link>
-                  ))}
-                </div>{" "}
-                <Link href="/signup">
-                  <Button className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] text-md font-medium text-sm normal-case button-transform">
-                    Get Started
-                  </Button>
-                </Link>
+                  </>
+                ) : null}
               </div>
             )}
           </div>
         )}
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 

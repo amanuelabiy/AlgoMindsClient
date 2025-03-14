@@ -1,9 +1,15 @@
 "use client";
 import FeaturesCarousel from "./featuresCarousel/FeaturesCarousel";
+import { motion } from "framer-motion";
 
 function Features() {
   return (
-    <div className="h-auto w-full py-20">
+    <motion.div
+      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, x: -100 }}
+      transition={{ duration: 0.5 }}
+      className="h-auto w-full py-20"
+    >
       <div className="flex flex-col justify-center items-center gap-4">
         <p className="text-[rgba(44,62,80,0.7)] text-center text-[24px] font-semibold leading-normal">
           Feature
@@ -13,7 +19,7 @@ function Features() {
         </h1>
         <FeaturesCarousel />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -123,6 +123,7 @@ function LandingPageCodeEditor() {
           scrollBeyondLastLine: false, // Prevents scrolling beyond last line
           accessibilitySupport: "off", // Disables screen reader support
         }}
+        loading={<></>}
       />
 
       <div className="flex flex-row justify-between items-center w-full border-t border-[rgba(44,62,80,0.10)]">
