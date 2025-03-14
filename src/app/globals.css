@@ -9,7 +9,7 @@
 }
 
 body {
-  font-family: "Chakra Petch", Helvetica, sans-serif;
+  font-family: "Chakra Petch", sans-serif, Helvetica, Arial;
 }
 
 @layer base {

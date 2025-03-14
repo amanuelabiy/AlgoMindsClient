@@ -50,7 +50,7 @@ function Hero() {
       </div>
 
       {/* Right Image Section */}
-      <div className="flex justify-center items-center lg:w-3/4 w-full relative lg:top-[-4rem]">
+      <div className="flex justify-center items-center lg:w-[85%] w-full relative lg:top-[-4rem] lg:right-[-4rem]">
         <LandingPageCodeEditor />
       </div>
     </div>
