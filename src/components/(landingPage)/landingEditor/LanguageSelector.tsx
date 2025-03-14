@@ -6,15 +6,11 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Language, LANGUAGE_VERSIONS } from "@/utils/app/constants";
 import { getCorrectLanguageFormat } from "@/utils/codeEditor/getCorrectLanguageFormat";
 import { ChevronDown } from "lucide-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface LanguageSelectorProps {
   currentLanguage: string;
@@ -39,7 +35,7 @@ function LanguageSelector({
           <Button
             variant="outline"
             className={`flex flex-row w-28 h-6 p-4 ${
-              spaceBetweenChevron ? "justify-between" : "justify-center"
+              !spaceBetweenChevron ? "justify-between" : "justify-center"
             } items-center gap-[10px] flex-shrink-0 rounded-[2px] bg-[#ECF0F1] 
     text-[rgba(44,62,80,0.70)] text-sm font-medium leading-normal text-center`}
           >
@@ -74,33 +70,3 @@ function LanguageSelector({
 }
 
 export default LanguageSelector;
-{
-  /* <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-
-        <DropdownMenuCheckboxItem
-          checked={showStatusBar}
-          onCheckedChange={setShowStatusBar}
-        >
-          Status Bar
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={showActivityBar}
-          onCheckedChange={setShowActivityBar}
-          disabled
-        >
-          Activity Bar
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={showPanel}
-          onCheckedChange={setShowPanel}
-        >
-          Panel
-        </DropdownMenuCheckboxItem>
-      </DropdownMenuContent>
-    </DropdownMenu> */
-}

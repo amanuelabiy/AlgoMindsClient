@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        "sway-right": "swayRight 1.2s infinite ease-in-out",
+      },
       fontFamiy: {
         chakra: ["Chakra Petch", "sans-serif"],
       },

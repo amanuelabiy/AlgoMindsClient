@@ -85,3 +85,17 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes swayRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-sway-right {
+  animation: swayRight 1.2s infinite ease-in-out;
+}
