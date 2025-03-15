@@ -12,11 +12,14 @@ import { Button } from "@/components/ui/button";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import LandingCodeEditorSkeleton from "@/components/loadingStates/Landing/LandingCodeEditorSkeleton";
+import { AnimatePresence } from "framer-motion";
+import LandingAIChat from "../LandingAIChat/LandingAIChat";
 
 function LandingPageCodeEditor() {
   const [language, setLanguage] = useState<Language>("javascript");
   const [value, setValue] = useState<string>(CODE_SNIPPETS[language]);
   const [editorLoading, setEditorLoading] = useState<boolean>(true);
+  const [showChat, setShowChat] = useState<boolean>(false);
 
   useEffect(() => {
     loader
@@ -57,7 +60,6 @@ function LandingPageCodeEditor() {
     setLanguage(language);
     setValue(CODE_SNIPPETS[language]);
   };
-  console.log("editorLoading", editorLoading);
 
   if (editorLoading) {
     return <LandingCodeEditorSkeleton />;
@@ -126,6 +128,16 @@ function LandingPageCodeEditor() {
         loading={<></>}
       />
 
+      {/* Chat Box (Animated) */}
+      <AnimatePresence>
+        {showChat && (
+          <LandingAIChat
+            codeSnippet={CODE_SNIPPETS[language]}
+            onClose={() => setShowChat(false)}
+          />
+        )}
+      </AnimatePresence>
+
       <div className="flex flex-row justify-between items-center w-full border-t border-[rgba(44,62,80,0.10)]">
         <div className="flex flex-row justify-center items-center mt-5 px-6 py-2 animate-sway-right">
           <h1 className="text-sm text-opacity-40 font-medium leading-normal">
@@ -137,7 +149,10 @@ function LandingPageCodeEditor() {
           </p>
         </div>
 
-        <Button className="w-24 bg-lighterBlue mt-6 mr-6 text-white px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100">
+        <Button
+          className="w-24 bg-lighterBlue mt-6 mr-6 text-white px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100"
+          onClick={() => setShowChat(true)}
+        >
           Run <FaAngleDoubleRight className="w-4 h-4" />
         </Button>
       </div>

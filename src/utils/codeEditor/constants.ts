@@ -58,3 +58,5 @@ class Program {
 }
 `,
 };
+
+export const emojiOptions = ["😀", "😂", "🙏", "🔥", "💩"];

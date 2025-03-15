@@ -52,7 +52,7 @@ function Hero() {
               src="/assets/images/rocketLanding.png"
               width={30}
               height={30}
-              className="xs:mt-0 mt-5 ml-2"
+              className="xs:mt-0 mt-5 custom-lg:mb-4 ml-2 animate-bounce"
             />
           </div>
         </div>
