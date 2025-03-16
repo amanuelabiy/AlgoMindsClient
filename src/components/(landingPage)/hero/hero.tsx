@@ -59,7 +59,7 @@ function Hero() {
       </motion.div>
 
       {/* Right Image Section */}
-      <div className="flex justify-center items-center custom-lg:w-[85%] md:w-[75%] w-full relative custom-lg:top-[-4rem] custom-lg:right-[-4rem]">
+      <div className="flex justify-center items-center max-w-[40rem] max-h-[40rem] custom-lg:w-[85%] md:w-[75%] w-full relative custom-lg:top-[-4rem] custom-lg:right-[-4rem]">
         <LandingPageCodeEditor />
       </div>
     </div>

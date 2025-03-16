@@ -1,12 +1,7 @@
 import React from "react";
-import NavbarSkeleton from "./NavbarSkeleton";
 
 function LandingSkeleton() {
-  return (
-    <>
-      <NavbarSkeleton />
-    </>
-  );
+  return <div className="w-full h-screen bg-[#e6f3fa]"></div>;
 }
 
 export default LandingSkeleton;

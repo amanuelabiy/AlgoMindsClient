@@ -1,7 +1,7 @@
 import Footer from "../footer/Footer";
 import AboutUs from "./aboutUs/AboutUs";
 import EmailMessages from "./emailMessages/EmailMessages";
-import Features from "./features/features";
+import ProblemsFaced from "./features/ProblemsFaced";
 import Hero from "./hero/hero";
 import Navbar from "./navbar/navbar";
 
@@ -16,7 +16,7 @@ function LandingPage() {
     >
       <Navbar />
       <Hero />
-      <Features />
+      <ProblemsFaced />
       <AboutUs />
       <EmailMessages />
       <Footer />

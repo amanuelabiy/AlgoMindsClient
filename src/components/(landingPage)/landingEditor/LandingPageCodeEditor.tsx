@@ -17,6 +17,7 @@ import LandingAIChat from "../LandingAIChat/LandingAIChat";
 import { useMutation } from "@tanstack/react-query";
 import { getChatResponseForLandingPage } from "@/lib/openai/api";
 import { getRandomErrorMessage } from "@/utils/landingChat/errorMessage";
+import { motion } from "framer-motion";
 
 export interface ChatMessages {
   sender: "user" | "ai";
@@ -26,7 +27,7 @@ export interface ChatMessages {
 function LandingPageCodeEditor() {
   const [language, setLanguage] = useState<Language>("javascript");
   const [value, setValue] = useState<string>(CODE_SNIPPETS[language]);
-  const [editorLoading, setEditorLoading] = useState<boolean>(true);
+
   const [showChat, setShowChat] = useState<boolean>(false);
   const [chatMessages, setChatMessages] = useState<ChatMessages[]>([]);
 
@@ -84,7 +85,6 @@ function LandingPageCodeEditor() {
         });
 
         monaco.editor.setTheme("orangeBlueLightTheme");
-        setEditorLoading(false);
       })
       .catch((error) => {
         console.error("Monaco loader error:", error);
@@ -96,12 +96,13 @@ function LandingPageCodeEditor() {
     setValue(CODE_SNIPPETS[language]);
   };
 
-  if (editorLoading) {
-    return <LandingCodeEditorSkeleton />;
-  }
-
   return (
-    <div className="flex flex-col justify-center gap-2 items-center w-[90%] h-full rounded-[12px] bg-white py-4 px-0 shadow-[0px_4px_7px_4px_rgba(0,0,0,0.25)]">
+    <motion.div
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 1, delay: 0.3 }}
+      className="flex flex-col justify-center gap-2 items-center w-[90%] h-full rounded-[12px] bg-white py-4 px-0 shadow-[0px_4px_7px_4px_rgba(0,0,0,0.25)]"
+    >
       {/* Header with Full-Width Border & Language Selector Inside Flow */}
       <div className="flex flex-col w-full">
         <div className="flex flex-row justify-between items-center px-6 border-b border-[rgba(44,62,80,0.10)]">
@@ -160,7 +161,7 @@ function LandingPageCodeEditor() {
           scrollBeyondLastLine: false, // Prevents scrolling beyond last line
           accessibilitySupport: "off", // Disables screen reader support
         }}
-        loading={<></>}
+        loading={<LandingCodeEditorSkeleton />}
       />
 
       {/* Chat Box (Animated) */}
@@ -194,7 +195,7 @@ function LandingPageCodeEditor() {
           Run <FaAngleDoubleRight className="w-4 h-4" />
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
