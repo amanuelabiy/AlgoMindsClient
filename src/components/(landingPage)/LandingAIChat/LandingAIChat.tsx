@@ -4,15 +4,21 @@ import { Input } from "@/components/ui/input";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuSendHorizontal } from "react-icons/lu";
 
 import CustomEmojiPicker from "./CustomEmojiPicker";
 import MessageBox from "./MessageBox";
+import { useMutation } from "@tanstack/react-query";
+import { getChatResponseForLandingPage } from "@/lib/openai/api";
+import { ChatMessages } from "../landingEditor/LandingPageCodeEditor";
+import { getRandomErrorMessage } from "@/utils/landingChat/errorMessage";
 
 interface ChatBoxProps {
-  codeSnippet: string;
   onClose: () => void;
+  isPending: boolean;
+  chatMessages: ChatMessages[];
+  setChatMessages: React.Dispatch<React.SetStateAction<ChatMessages[]>>;
 }
 
 const chatBoxVariants = {
@@ -20,11 +26,13 @@ const chatBoxVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
-const LandingAIChat = ({ codeSnippet, onClose }: ChatBoxProps) => {
+const LandingAIChat = ({
+  onClose,
+  chatMessages,
+  setChatMessages,
+  isPending,
+}: ChatBoxProps) => {
   const [message, setMessage] = useState<string>("");
-  const [thinking, setThinking] = useState<boolean>(true);
-  const [aiMessages, setAiMessages] = useState<string[]>([]);
-  const [userMessages, setUserMessages] = useState<string[]>([]);
 
   // Create a reference for the input field
 
@@ -34,12 +42,31 @@ const LandingAIChat = ({ codeSnippet, onClose }: ChatBoxProps) => {
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
+  // User sends a message
+
+  const { mutate: sendUserMessage, isPending: isUserMessagePending } =
+    useMutation({
+      mutationFn: getChatResponseForLandingPage,
+    });
+
   const handleSendMessage = () => {
     if (message.trim() === "") return;
 
     // Append user message to userMessages
-    setUserMessages((prev) => [...prev, message]);
+    setChatMessages((prev) => [...prev, { sender: "user", text: message }]);
     setMessage(""); // Clear input field
+    sendUserMessage(message, {
+      onSuccess: (response) => {
+        const aiMessage = response.data.message;
+        setChatMessages((prev) => [...prev, { sender: "ai", text: aiMessage }]);
+      },
+      onError: () => {
+        setChatMessages((prev) => [
+          ...prev,
+          { sender: "ai", text: getRandomErrorMessage() },
+        ]);
+      },
+    });
   };
 
   useEffect(() => {
@@ -49,17 +76,7 @@ const LandingAIChat = ({ codeSnippet, onClose }: ChatBoxProps) => {
         behavior: "smooth",
       });
     }
-  }, [userMessages, aiMessages]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setThinking(false);
-      setAiMessages((prev) => [
-        ...prev,
-        "I think your code is correct. Good job!",
-      ]);
-    }, 1000);
-  }, []);
+  }, [chatMessages]); // Scroll to the bottom of the chat container when a new message is added
 
   useEffect(() => {
     // Focus on the input field when the chat box loads
@@ -101,28 +118,32 @@ const LandingAIChat = ({ codeSnippet, onClose }: ChatBoxProps) => {
           ref={chatContainerRef}
           className="text-sm text-gray-800 overflow-y-auto h-[200px] max-w-[250px] break-all px-4 py-1 flex flex-col gap-2"
         >
-          {thinking ? (
+          {isPending ? (
             <>Thinking... 🤔</>
           ) : (
             <>
               {/* AI messages */}
-              {aiMessages.map((message, index) => (
-                <div key={index} className="flex items-start gap-2">
-                  <FontAwesomeIcon
-                    icon={faRobot}
-                    className="text-[#2980B9] text-xs mt-1"
-                  />
-                  <MessageBox aiMessage={message} />
-                </div>
-              ))}
-
-              {/*User messages */}
-              {userMessages.map((message, index) => (
+              {chatMessages.map((message, index) => (
                 <div
-                  key={`user-${index}`}
-                  className="flex items-end justify-end"
+                  key={index}
+                  className={`flex ${
+                    message.sender === "user"
+                      ? "justify-end"
+                      : "items-start gap-2"
+                  }`}
                 >
-                  <MessageBox aiMessage={message} isUser />
+                  {message.sender === "ai" ? (
+                    <>
+                      {" "}
+                      <FontAwesomeIcon
+                        icon={faRobot}
+                        className="text-secondaryColor text-xs mt-1"
+                      />
+                      <MessageBox message={message.text} isUser={false} />
+                    </>
+                  ) : (
+                    <MessageBox message={message.text} isUser />
+                  )}
                 </div>
               ))}
             </>
@@ -135,6 +156,12 @@ const LandingAIChat = ({ codeSnippet, onClose }: ChatBoxProps) => {
             placeholder="Enter your message here"
             onChange={(e) => setMessage(e.target.value)}
             value={message}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSendMessage();
+              }
+            }}
           />
 
           <CustomEmojiPicker setMessage={setMessage} />

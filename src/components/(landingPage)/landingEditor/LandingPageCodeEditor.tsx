@@ -14,12 +14,47 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import LandingCodeEditorSkeleton from "@/components/loadingStates/Landing/LandingCodeEditorSkeleton";
 import { AnimatePresence } from "framer-motion";
 import LandingAIChat from "../LandingAIChat/LandingAIChat";
+import { useMutation } from "@tanstack/react-query";
+import { getChatResponseForLandingPage } from "@/lib/openai/api";
+import { getRandomErrorMessage } from "@/utils/landingChat/errorMessage";
+
+export interface ChatMessages {
+  sender: "user" | "ai";
+  text: string;
+}
 
 function LandingPageCodeEditor() {
   const [language, setLanguage] = useState<Language>("javascript");
   const [value, setValue] = useState<string>(CODE_SNIPPETS[language]);
   const [editorLoading, setEditorLoading] = useState<boolean>(true);
   const [showChat, setShowChat] = useState<boolean>(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessages[]>([]);
+
+  const { mutate: sendMessage, isPending } = useMutation({
+    mutationFn: getChatResponseForLandingPage,
+  });
+
+  const handleRunClick = () => {
+    setShowChat(true);
+
+    sendMessage(value, {
+      onSuccess: (response) => {
+        const message = response.data.message;
+        setChatMessages((prev) => [...prev, { sender: "ai", text: message }]);
+      },
+      onError: () => {
+        setChatMessages((prev) => [
+          ...prev,
+          { sender: "ai", text: getRandomErrorMessage() },
+        ]);
+      },
+    });
+  };
+
+  const handleCloseClick = () => {
+    setShowChat(false);
+    setChatMessages([]);
+  };
 
   useEffect(() => {
     loader
@@ -132,8 +167,10 @@ function LandingPageCodeEditor() {
       <AnimatePresence>
         {showChat && (
           <LandingAIChat
-            codeSnippet={CODE_SNIPPETS[language]}
-            onClose={() => setShowChat(false)}
+            onClose={handleCloseClick}
+            isPending={isPending}
+            chatMessages={chatMessages}
+            setChatMessages={setChatMessages}
           />
         )}
       </AnimatePresence>
@@ -151,7 +188,8 @@ function LandingPageCodeEditor() {
 
         <Button
           className="w-24 bg-lighterBlue mt-6 mr-6 text-white px-10 rounded-lg transition-all duration-200 hover:bg-[#3498db] hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100"
-          onClick={() => setShowChat(true)}
+          onClick={handleRunClick}
+          disabled={value.length === 0 || showChat}
         >
           Run <FaAngleDoubleRight className="w-4 h-4" />
         </Button>
