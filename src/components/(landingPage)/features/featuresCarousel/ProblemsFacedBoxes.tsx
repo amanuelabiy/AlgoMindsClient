@@ -1,12 +1,4 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import {
   faMagnifyingGlass,
   IconDefinition,
@@ -16,6 +8,7 @@ import {
 import ProblemsFacedBox from "./ProblemsFacedBox";
 
 export interface ProblemFaced {
+  id: number;
   icon: IconDefinition;
   name: string;
   description: string;
@@ -24,17 +17,21 @@ export interface ProblemFaced {
 
 const problems: ProblemFaced[] = [
   {
+    id: 1,
     icon: faCompass,
     name: "No Guidance",
-    description: "Integrated problem repository.",
+    description:
+      "Decoding complex solutions alone is frustrating. Without proper guidance, you can spend hours stuck.",
   },
   {
+    id: 2,
     icon: faComment,
     name: "No Real Interview Practice",
     description:
       "Real interviews demand more than coding—they require clear communication and strategic questions to ask.",
   },
   {
+    id: 3,
     icon: faMagnifyingGlass,
     name: "No Feedback",
     description:
@@ -44,9 +41,9 @@ const problems: ProblemFaced[] = [
 
 function ProblemsFacedBoxes() {
   return (
-    <div>
+    <div className="flex flex-col gap-8 justify-start mt-4 items-start lg:grid custom-lg:grid-cols-3 custom-lg:grid-rows-2 lg:gap-8 custom-lg:justify-items-center lg:place-items-center">
       {problems.map((problem, index) => (
-        <ProblemsFacedBox problem={problem} index={index} />
+        <ProblemsFacedBox key={problem.id} problem={problem} index={index} />
       ))}
     </div>
   );
