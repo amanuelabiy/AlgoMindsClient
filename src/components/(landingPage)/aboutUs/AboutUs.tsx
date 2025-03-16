@@ -1,13 +1,91 @@
+import Image from "next/image";
 import React from "react";
 
 function AboutUs() {
   return (
-    <div className="bg-[#DBF0FB]">
-      <div>
-        <h1 className="text-primaryColor text-lg font-bold leading-normal flex-shrink-0">
+    <div className="flex border shadow-2xl custom-lg:flex-row flex-col justify-center items-center custom-lg:gap-8 gap-0 p-24 w-full">
+      <div className="flex flex-col justify-center items-center px-10 gap-4 pb-12 md:mt-8">
+        <h1 className="text-primaryColor sm:text-3xl text-2xl font-bold leading-normal flex-shrink-0 text-center custom-lg:text-left max-w-[36rem]">
           How We Guarantee Interview-Ready Results for Every User
         </h1>
-        <p></p>
+        <p className="text-[#737070] sm:text-base text-xs font-normal leading-normal tracking-[0.8px] text-center custom-lg:text-left max-w-[36rem]">
+          AlgoAI is redefining technical interview prep by harnessing the power
+          of AI to provide instant feedback, personalized insights, and
+          real-time coding assistance. As software engineers, we know the
+          struggle
+        </p>
+        <p className="text-[#737070] md:mt-8 italic text-xs leading-normal tracking-[0.8px] text-center custom-lg:text-left max-w-[36rem]">
+          <span className="not-italic">✅</span> "I’ve always wished for
+          real-time feedback while solving coding problems—AlgoAI is solving a
+          huge gap in interview prep!"
+        </p>
+      </div>
+
+      <div className="flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-row justify-center items-center p-2 gap-6">
+          <div className="bg-white p-2 ml-4">
+            <Image
+              alt="neural-network"
+              src="/assets/images/neuralNetwork.svg"
+              width={65}
+              height={100}
+            />
+          </div>
+          <div className="mt-6">
+            <h1 className="flex-shrink-0 text-primaryColor text-left font-bold leading-normal sm:text-xl text-md">
+              Smart Code Insights
+            </h1>
+            <p className="text-[#4E4E4E] text-xs font-normal leading-normal max-w-lg sm:text-[14px]">
+              AI-driven feedback, optimized solutions, and step-by-step
+              explanations to improve your problem-solving skills and coding
+              efficiency.
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-row justify-center items-center p-2 gap-6">
+          <div className="bg-white p-2 ml-4">
+            <Image
+              alt="clock"
+              src="/assets/images/clock.svg"
+              width={65}
+              height={100}
+              objectFit="contain"
+              className="scale-75"
+            />
+          </div>
+          <div className="mt-6">
+            <h1 className="flex-shrink-0 text-primaryColor text-left font-bold leading-normal sm:text-xl text-md ">
+              Realistic Interview Practice
+            </h1>
+            <p className="text-[#4E4E4E] font-chakra text-xs font-normal leading-normal max-w-lg sm:text-[14px]">
+              Simulate real coding interviews with AI-generated hints, time
+              tracking, and in-depth performance analysis to help you ace the
+              real thing.
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-row justify-center items-center p-2 gap-6">
+          <div className="bg-white p-2 ml-4">
+            <Image
+              alt="clock"
+              src="/assets/images/guidedLearning.svg"
+              width={65}
+              height={100}
+              objectFit="contain"
+              className="scale-75"
+            />
+          </div>
+          <div className="mt-6">
+            <h1 className="flex-shrink-0 text-primaryColor text-left font-bold leading-normal sm:text-xl text-md">
+              Guided Learning
+            </h1>
+            <p className="text-[#4E4E4E] font-chakra text-xs font-normal leading-normal max-w-lg sm:text-[14px]">
+              Follow structured, AI-curated learning paths that adapt to your
+              skill level, keeping you focused on the right problems at the
+              right time.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

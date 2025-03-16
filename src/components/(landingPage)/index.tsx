@@ -18,8 +18,11 @@ function LandingPage() {
     >
       <Navbar />
       <Hero />
-      <ProblemsFaced />
+      <div className=" bg-[#edf7ff]">
+        <ProblemsFaced />
+      </div>
       <AboutUs />
+
       <EmailMessages />
       <Footer />
     </div>
