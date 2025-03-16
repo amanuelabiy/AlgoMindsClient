@@ -1,11 +1,21 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 function AboutUs() {
   return (
-    <div
+    <div className="bg-[#DBF0FB]">
+      <div>
+        <h1 className="text-primaryColor text-lg font-bold leading-normal flex-shrink-0">
+          How We Guarantee Interview-Ready Results for Every User
+        </h1>
+        <p></p>
+      </div>
+    </div>
+  );
+}
+
+export default AboutUs;
+{
+  /* <div
       id="about"
       className="flex flex-col lg:flex-row lg:mx-auto lg:py-24 lg:px-24 gap-8 justify-center items-center flex-shrink-0 h-auto w-full bg-darkBlue bg-cover bg-center bg-no-repeat py-20"
     >
@@ -76,8 +86,5 @@ function AboutUs() {
           }}
         />
       </div>
-    </div>
-  );
+    </div> */
 }
-
-export default AboutUs;
