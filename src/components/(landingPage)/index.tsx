@@ -1,9 +1,9 @@
 import Footer from "../footer/Footer";
 import AboutUs from "./aboutUs/AboutUs";
-import EmailMessages from "./emailMessages/EmailMessages";
 import ProblemsFaced from "./features/ProblemsFaced";
 import Hero from "./hero/hero";
 import Navbar from "./navbar/navbar";
+import Pricing from "./pricing/Pricing";
 
 function LandingPage() {
   return (
@@ -22,8 +22,8 @@ function LandingPage() {
         <ProblemsFaced />
       </div>
       <AboutUs />
+      <Pricing />
 
-      <EmailMessages />
       <Footer />
     </div>
   );
