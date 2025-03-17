@@ -1,5 +1,6 @@
 import Footer from "../footer/Footer";
 import AboutUs from "./aboutUs/AboutUs";
+import Faq from "./faq/Faq";
 import ProblemsFaced from "./features/ProblemsFaced";
 import Hero from "./hero/hero";
 import Navbar from "./navbar/navbar";
@@ -18,12 +19,14 @@ function LandingPage() {
     >
       <Navbar />
       <Hero />
-      <div className=" bg-[#edf7ff]">
+      <div className="mt-8 md:mt-0 bg-[#edf7ff]">
         <ProblemsFaced />
       </div>
       <AboutUs />
       <Pricing />
-
+      <div className="mt-16">
+        <Faq />
+      </div>
       <Footer />
     </div>
   );
