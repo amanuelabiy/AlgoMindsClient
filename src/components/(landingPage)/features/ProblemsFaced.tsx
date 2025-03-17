@@ -16,7 +16,7 @@ function ProblemsFaced() {
           <p className="text-secondaryColor text-center text-md md:text-xl font-semibold leading-normal">
             PROBLEM
           </p>
-          <h1 className="text-primaryColor text-center text-xl md:text-4xl font-bold leading-normal">
+          <h1 className="text-primaryColor text-center text-xl md:text-4xl font-bold leading-normal mt-2">
             Why Traditional Coding Prep Fails
           </h1>
         </motion.div>
