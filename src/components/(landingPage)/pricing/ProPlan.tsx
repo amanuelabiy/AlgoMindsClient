@@ -62,15 +62,17 @@ function ProPlan() {
           </motion.div>
         </div>
       ) : null}
-      <div className="flex flex-col justify-center items-center gap-2">
-        <h2 className="text-secondaryColor text-center text-xl font-semibold leading-normal">
-          Pro Plan
-        </h2>
-        <h2 className="text-secondaryColor text-center text-3xl font-semibold leading-normal">
-          {isAnnual ? "$7.99/month" : "$9.99/month"}
-        </h2>
-        <p className="text-[#4E4E4E] text-center text-xs font-normal leading-normal mt-4">
-          Perfect for those who want to test the waters. 🚀
+      <div className="flex flex-col justify-center items-center gap-4">
+        <div>
+          <h2 className="text-secondaryColor text-center text-xl font-semibold leading-normal">
+            Pro Plan
+          </h2>
+          <h2 className="text-secondaryColor text-center text-3xl font-semibold leading-normal">
+            {isAnnual ? "$7.99/month" : "$9.99/month"}
+          </h2>
+        </div>
+        <p className="text-[#4E4E4E] text-center text-xs font-normal leading-normal max-w-[18rem] px-1">
+          For those who want to stay ahead of the competition 🏆
         </p>
         <div className="flex justify-center items-center w-full">
           <Switch isAnnual={isAnnual} setIsAnnual={setIsAnnual} />

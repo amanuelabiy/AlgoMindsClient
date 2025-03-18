@@ -1,6 +1,6 @@
 "use client";
 import { problemsFacedTextContainer } from "@/utils/framerMotion/container";
-import ProblemsFacedBoxes from "./featuresCarousel/ProblemsFacedBoxes";
+import ProblemsFacedBoxes from "./ProblemsFacedBoxes";
 import { motion } from "framer-motion";
 
 function ProblemsFaced() {

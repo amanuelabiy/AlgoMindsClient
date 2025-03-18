@@ -6,7 +6,6 @@ import {
   faCompass,
 } from "@fortawesome/free-solid-svg-icons";
 import ProblemsFacedBox from "./ProblemsFacedBox";
-
 export interface ProblemFaced {
   id: number;
   icon: IconDefinition;
