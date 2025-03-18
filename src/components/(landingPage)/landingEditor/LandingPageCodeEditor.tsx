@@ -101,10 +101,10 @@ function LandingPageCodeEditor() {
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 1, delay: 0.3 }}
-      className="flex flex-col justify-center gap-2 items-center w-[90%] h-full rounded-[12px] bg-white py-4 px-0 shadow-[0px_4px_7px_4px_rgba(0,0,0,0.25)]"
+      className="flex flex-col justify-center mt-[14rem] mb-[14rem] gap-2 items-center w-[90%] max-h-[30rem] h-[30rem] flex-shrink-0 rounded-[12px] bg-white py-4 px-0 shadow-[0px_4px_7px_4px_rgba(0,0,0,0.25)]"
     >
       {/* Header with Full-Width Border & Language Selector Inside Flow */}
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full h-[10rem]">
         <div className="flex flex-row justify-between items-center px-6 border-b border-[rgba(44,62,80,0.10)]">
           <h1 className="flex flex-row items-center gap-2 text-[rgba(44,62,80,0.70)] text-md font-medium leading-normal mb-2">
             <span className="text-secondaryColor">
@@ -140,7 +140,7 @@ function LandingPageCodeEditor() {
       </div>
 
       <Editor
-        height="45vh"
+        height="25rem"
         width="100%"
         theme="orangeBlueLightTheme"
         defaultLanguage="javascript"
@@ -149,7 +149,7 @@ function LandingPageCodeEditor() {
         onChange={(value) => setValue(value || "")}
         options={{
           scrollbar: {
-            vertical: "hidden", // Hide vertical scrollbar
+            vertical: "auto", // Hide vertical scrollbar
             horizontal: "hidden", // Hide horizontal scrollbar
           },
           fontFamily: "Chakra Petch, sans-serif", // Set font family

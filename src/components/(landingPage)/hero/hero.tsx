@@ -10,7 +10,7 @@ import { container } from "@/utils/framerMotion/container";
 
 function Hero() {
   return (
-    <div className="flex flex-col custom-lg:flex-row custom-lg:gap-8 gap-20 justify-center items-center min-h-screen w-full bg-cover bg-center bg-no-repeat p-4 custom-lg:px-36 custom-lg:py-20">
+    <div className="flex flex-col custom-lg:flex-row custom-lg:gap-8 gap-20 justify-center items-center w-full bg-cover bg-center bg-no-repeat p-4 custom-lg:px-36 custom-lg:py-20">
       {/* Left Text Section */}
       <motion.div
         variants={container(0.2)}
@@ -59,7 +59,7 @@ function Hero() {
       </motion.div>
 
       {/* Right Image Section */}
-      <div className="flex justify-center items-center max-w-[40rem] max-h-[40rem] custom-lg:w-[85%] md:w-[75%] w-full relative custom-lg:top-[-4rem] custom-lg:right-[-4rem]">
+      <div className="flex flex-col pt-0 justify-center items-center max-w-[40rem] max-h-[45rem] custom-lg:w-[85%] md:w-[75%] w-full relative custom-lg:top-[-4rem] custom-lg:right-[-4rem] overflow-hidden">
         <LandingPageCodeEditor />
       </div>
     </div>
@@ -67,3 +67,8 @@ function Hero() {
 }
 
 export default Hero;
+{
+  /* <div className="flex justify-center items-center max-w-[40rem] max-h-[30rem] custom-lg:w-[85%] md:w-[75%] w-full relative custom-lg:top-[-4rem] custom-lg:right-[-4rem] overflow-hidden">
+        <LandingPageCodeEditor />
+      </div> */
+}

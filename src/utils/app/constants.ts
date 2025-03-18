@@ -8,3 +8,5 @@ export const LANGUAGE_VERSIONS = {
 };
 
 export type Language = keyof typeof LANGUAGE_VERSIONS;
+
+export const maxScreenWidth = 1600;

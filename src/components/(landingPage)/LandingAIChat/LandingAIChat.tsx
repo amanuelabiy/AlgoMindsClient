@@ -91,7 +91,7 @@ const LandingAIChat = ({
       animate="visible"
       exit="hidden"
       variants={chatBoxVariants}
-      className="absolute md:bottom-[-2rem] md:left-[-5rem] w-[250px] bg-white z-50 rounded-lg shadow-lg border border-gray-300"
+      className="absolute md:bottom-[0rem] md:left-[4rem] w-[250px] bg-white z-50 rounded-lg shadow-lg border border-gray-300"
     >
       <div className="flex flex-col gap-2">
         <div className="flex justify-between items-center border-b border-[rgba(44,62,80,0.10)] p-4">
