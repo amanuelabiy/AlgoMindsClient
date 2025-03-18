@@ -10,13 +10,12 @@ import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import { IoMenu as MobileMenu } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { CiSettings } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
-import { motion } from "framer-motion";
+import { motion, useCycle, AnimatePresence } from "framer-motion";
 import { container } from "@/utils/framerMotion/container";
 
 function Navbar() {
@@ -25,6 +24,9 @@ function Navbar() {
 
   const router = useRouter();
   const pathname = usePathname();
+
+  // Mobile Navbar Animation
+  const [mobileNav, toggleMobileNav] = useCycle(false, true);
 
   const { mutate: logout } = useMutation({
     mutationFn: logoutMutationFn,
@@ -75,7 +77,7 @@ function Navbar() {
   };
 
   const displayButtons = !isLoading && mounted;
-
+  const checkpoint = "";
   const isLanding = pathname === "/";
 
   const displayGuestNavLinks = !user && displayButtons && isLanding;
@@ -86,7 +88,7 @@ function Navbar() {
       animate="visible"
       className={`flex flex-row w-full ${isLanding ? "h-28" : "h-20 py-8"}`}
     >
-      <div className="flex flex-row w-full justify-between items-center p-8 md:px-16 md:mx-24">
+      <div className="flex flex-row w-full justify-between items-center p-8 px-16 lg:mx-24">
         <h1
           onClick={handleLogoClick}
           className="flex flex-row justify-center items-start text-black text-[36px] font-chakra font-bold leading-normal button-transform hover:cursor-pointer hover:shadow-none"
@@ -102,9 +104,78 @@ function Navbar() {
         </h1>
 
         {/*Mobile Navbar hidden on Larger Screens */}
-        <Button className="bg-transparent hover:bg-transparent cursor-pointer hover:shadow-none shadow-none rounded-md button-transform border-none lg:hidden">
-          <MobileMenu className="w-6 h-6 text-black" />
-        </Button>
+        <div className="lg:hidden relative">
+          <motion.button
+            animate={mobileNav ? "open" : "closed"}
+            onClick={() => toggleMobileNav()}
+            className="absolute top-[-5px] right-[-1rem] z-[100] flex flex-col space-y-1 cursor-pointer"
+          >
+            <motion.span
+              variants={{
+                closed: { rotate: 0, y: 0 },
+                open: { rotate: 45, y: 5 },
+              }}
+              className="w-5 h-px block bg-primaryColor"
+            ></motion.span>
+            <motion.span
+              variants={{ closed: { opacity: 1 }, open: { opacity: 0 } }}
+              className="w-5 h-px block bg-primaryColor"
+            ></motion.span>
+            <motion.span
+              variants={{ closed: { rotate: 0 }, open: { rotate: -45, y: -5 } }}
+              className="w-5 h-px block bg-primaryColor"
+            ></motion.span>
+          </motion.button>
+          <AnimatePresence>
+            {mobileNav && (
+              <motion.div
+                key="mobile-nav"
+                variants={{
+                  open: {
+                    x: "0%",
+                  },
+                  closed: {
+                    x: "-100%",
+                  },
+                }}
+                initial="closed"
+                animate="open"
+                exit="closed"
+                className="fixed w-full h-full inset-0 bg-white flex flex-col justify-center space-y-10 p-6 z-[50]"
+              >
+                <div>
+                  <ul className="space-y-5">
+                    <li>
+                      <a href="#" className="text-4xl font-bold">
+                        Link #1
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-4xl font-bold">
+                        Link #2
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-4xl font-bold">
+                        Link #3
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="w-full bg-white h-px"></div>
+                <div>
+                  <ul className="flex items-center gap-x-5 justify-center">
+                    <li>
+                      <div className="h-10 w-10 bg-gray-300"></div>
+                      <div className="h-10 w-10 bg-gray-300"></div>
+                      <div className="h-10 w-10 bg-gray-300"></div>
+                    </li>
+                  </ul>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/**Sign Up and Login Buttons Hidden on Larger Screens*/}
         {displayButtons && (
