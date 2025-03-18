@@ -67,8 +67,3 @@ function Hero() {
 }
 
 export default Hero;
-{
-  /* <div className="flex justify-center items-center max-w-[40rem] max-h-[30rem] custom-lg:w-[85%] md:w-[75%] w-full relative custom-lg:top-[-4rem] custom-lg:right-[-4rem] overflow-hidden">
-        <LandingPageCodeEditor />
-      </div> */
-}

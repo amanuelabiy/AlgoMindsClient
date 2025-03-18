@@ -22,6 +22,7 @@ import { container } from "@/utils/framerMotion/container";
 function Navbar() {
   const { user, isLoading, refetch, setUser } = useAuthContext();
   const [mounted, setMounted] = useState<boolean>(false);
+
   const router = useRouter();
   const pathname = usePathname();
 
@@ -83,9 +84,7 @@ function Navbar() {
       variants={isLanding ? container(0) : undefined}
       initial="hidden"
       animate="visible"
-      className={`flex flex-row w-full ${
-        isLanding ? "h-28" : "h-20 py-8"
-      } max-w-full`}
+      className={`flex flex-row w-full ${isLanding ? "h-28" : "h-20 py-8"}`}
     >
       <div className="flex flex-row w-full justify-between items-center p-8 md:px-16 md:mx-24">
         <h1
@@ -96,9 +95,9 @@ function Navbar() {
             icon={faRobot}
             className="text-[#2980B9] mt-[3px] mr-[3px]"
           />
-          Algo.
+          Algo
           <span className="text-[36px] font-chakra font-bold leading-normal text-secondaryColor">
-            AI
+            Mind
           </span>
         </h1>
 

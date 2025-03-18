@@ -5,7 +5,6 @@ import ProblemsFaced from "./problemsFaced/ProblemsFaced";
 import Hero from "./hero/hero";
 import Navbar from "./navbar/navbar";
 import Pricing from "./pricing/Pricing";
-import { maxScreenWidth } from "@/utils/app/constants";
 
 function LandingPage() {
   return (
@@ -18,7 +17,7 @@ function LandingPage() {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className={`max-w-[${maxScreenWidth}px] mx-auto w-full`}>
+      <div className="max-w-[1600px] mx-auto w-full">
         <Navbar />
         <Hero />
         <div className="mt-8 rounded-full">

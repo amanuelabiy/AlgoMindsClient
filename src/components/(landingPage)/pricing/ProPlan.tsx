@@ -102,7 +102,7 @@ function ProPlan() {
       <div className="flex justify-center flex-row items-center w-full">
         <Button
           variant="outline"
-          className="bg-blue-500 w-[90%] text-white border-secondaryColor border-2 hover:text-white hover:bg-blue-800 py-5 text-xl px-6 rounded-lg"
+          className="bg-blue-500 w-[90%] button-transform text-white border-secondaryColor border-2 hover:text-white hover:bg-blue-800 py-5 text-xl px-6 rounded-lg"
         >
           Get Started
         </Button>

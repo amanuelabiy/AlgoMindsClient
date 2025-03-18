@@ -179,7 +179,7 @@ function LandingPageCodeEditor() {
       <div className="flex flex-row justify-between items-center w-full border-t border-[rgba(44,62,80,0.10)]">
         <div className="flex flex-row justify-center items-center mt-5 px-6 py-2 animate-sway-right">
           <h1 className="text-sm text-opacity-40 font-medium leading-normal">
-            🚀Hit Run & Let <span className="text-lighterBlue">AlgoAI</span>{" "}
+            🚀Hit Run & Let <span className="text-lighterBlue">AlgoMind</span>{" "}
             Analyze Your Code
           </h1>{" "}
           <p className="ml-1">
