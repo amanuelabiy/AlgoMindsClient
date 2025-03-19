@@ -54,7 +54,7 @@ function Login() {
           router.replace(`/verify-mfa?email=${data.email}`);
         }
         setUser(response.data);
-        router.replace("/problems");
+        router.replace("/waitlist");
       },
       onError: (error) => {
         setError("root", {
