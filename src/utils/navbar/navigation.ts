@@ -1,12 +1,12 @@
 export const AUTH_NAV_LINKS = [
-  { label: "Problems", href: "/problems" },
-  { label: "Leaderboard", href: "/leaderboard" },
-  { label: "Statistics", href: "/statistics" },
+  { id: 1, label: "Problems", href: "/problems" },
+  { id: 2, label: "Leaderboard", href: "/leaderboard" },
+  { id: 3, label: "Statistics", href: "/statistics" },
 ];
 
 export const GUEST_NAV_LINKS = [
-  { label: "Features", href: "#features" },
-  { label: "About", href: "#about" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Contact", href: "#contact" },
+  { id: 4, label: "Features", href: "#features" },
+  { id: 5, label: "About", href: "#about" },
+  { id: 6, label: "Pricing", href: "#pricing" },
+  { id: 7, label: "Contact", href: "#contact" },
 ];

@@ -28,6 +28,19 @@ function Navbar() {
   // Mobile Navbar Animation
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
 
+  // Disable body scroll when mobile nav is open
+  useEffect(() => {
+    if (mobileNav) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileNav]);
+
   const { mutate: logout } = useMutation({
     mutationFn: logoutMutationFn,
     onSettled: () => {
@@ -141,35 +154,39 @@ function Navbar() {
                 initial="closed"
                 animate="open"
                 exit="closed"
-                className="fixed w-full h-full inset-0 bg-white flex flex-col justify-center space-y-10 p-6 z-[50]"
+                className="fixed w-full h-full inset-0 bg-white flex flex-col justify-center items-center space-y-10 p-6 z-[50]"
               >
                 <div>
-                  <ul className="space-y-5">
-                    <li>
-                      <a href="#" className="text-4xl font-bold">
-                        Link #1
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="text-4xl font-bold">
-                        Link #2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="text-4xl font-bold">
-                        Link #3
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-full bg-white h-px"></div>
-                <div>
-                  <ul className="flex items-center gap-x-5 justify-center">
-                    <li>
-                      <div className="h-10 w-10 bg-gray-300"></div>
-                      <div className="h-10 w-10 bg-gray-300"></div>
-                      <div className="h-10 w-10 bg-gray-300"></div>
-                    </li>
+                  <ul className="space-y-5 flex flex-col justify-center items-center">
+                    {user ? (
+                      <>
+                        {AUTH_NAV_LINKS.map((link) => (
+                          <li>
+                            <Link
+                              className="text-4xl font-bold"
+                              key={link.id}
+                              href={link.href}
+                            >
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        {GUEST_NAV_LINKS.map((link) => (
+                          <li>
+                            <Link
+                              className="text-4xl font-bold"
+                              key={link.id}
+                              href={link.href}
+                            >
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </>
+                    )}
                   </ul>
                 </div>
               </motion.div>
@@ -184,7 +201,7 @@ function Navbar() {
               <div className="flex flex-row justify-center items-center gap-4">
                 <div className="flex flex-row gap-2 justify-center items-center">
                   {AUTH_NAV_LINKS.map((link) => (
-                    <Link href={link.href} key={link.label}>
+                    <Link href={link.href} key={link.id}>
                       <Button
                         className={`w-28 h-[25px] bg-transparent p-5 ${
                           pathname === link.href
@@ -216,7 +233,7 @@ function Navbar() {
                   {displayGuestNavLinks ? (
                     <>
                       {GUEST_NAV_LINKS.map((link) => (
-                        <Link href={link.href} key={link.label}>
+                        <Link href={link.href} key={link.id}>
                           <Button
                             className={`w-24 h-[25px] text-[#492B2B] bg-transparent p-5 text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
                           >

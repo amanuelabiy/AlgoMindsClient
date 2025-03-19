@@ -16,7 +16,7 @@ function Hero() {
         variants={container(0.2)}
         initial="hidden"
         animate="visible"
-        className="flex flex-col gap-6 justify-center custom-lg:items-start items-center mt-12 relative custom-lg:top-[-4rem]"
+        className="flex flex-col mb-[4rem] gap-6 justify-center custom-lg:items-start items-center mt-12 relative custom-lg:top-[-4rem]"
       >
         <h1 className="text-black text-[46px] font-bold leading-normal text-center custom-lg:text-left max-w-[36rem] custom-lg:max-w-[54rem]">
           Practice <span className="text-lighterBlue">Data Structures </span> &

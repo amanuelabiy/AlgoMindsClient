@@ -34,7 +34,7 @@ function Footer() {
   const { user } = useAuthContext();
   return (
     <div className="min-h-[25rem] py-16 px-6">
-      <div className="flex flex-col sm:flex-row h-full w-full ml-auto mr-auto max-w-[100rem] sm:justify-center sm:w-[80%] rounded-[8rem] shadow-lg">
+      <div className="flex sm:gap-14 lg:gap-0 sm:p-10 flex-col sm:flex-row h-full w-full ml-auto mr-auto max-w-[100rem] sm:justify-center sm:w-[80%] rounded-[8rem] shadow-lg">
         <div className="flex flex-col justify-center sm:items-start md:pl-32 items-center sm:w-1/2 rounded-t-[8rem] sm:rounded-tr-[0rem] sm:rounded-bl-[8rem] gap-6 px-10 pt-20 pb-12">
           <h1 className="flex flex-row justify-center items-start text-black text-[36px] font-chakra font-bold leading-normal transition-all duration-200 hover:scale-105 hover:z-10 hover:cursor-pointer hover:shadow-none">
             <FontAwesomeIcon
