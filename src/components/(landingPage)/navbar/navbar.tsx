@@ -102,43 +102,46 @@ function Navbar() {
       className={`flex flex-row w-full ${isLanding ? "h-28" : "h-20 py-8"}`}
     >
       <div className="flex flex-row w-full justify-between items-center p-8 px-16 lg:mx-24">
-        <h1
-          onClick={handleLogoClick}
-          className="flex flex-row justify-center items-start text-black text-[36px] font-chakra font-bold leading-normal button-transform hover:cursor-pointer hover:shadow-none"
+        <div className="">
+          <h1
+            onClick={handleLogoClick}
+            className="flex flex-row justify-center items-start text-black text-[36px] font-chakra font-bold leading-normal button-transform hover:cursor-pointer hover:shadow-none"
+          >
+            <FontAwesomeIcon
+              icon={faRobot}
+              className="text-[#2980B9] mt-[3px] mr-[3px]"
+            />
+            Algo
+            <span className="text-[36px] font-chakra font-bold leading-normal text-secondaryColor">
+              Minds
+            </span>
+          </h1>
+        </div>
+
+        <motion.button
+          animate={mobileNav ? "open" : "closed"}
+          onClick={() => toggleMobileNav()}
+          className="z-[100] ml-auto flex flex-col space-y-1 cursor-pointer"
         >
-          <FontAwesomeIcon
-            icon={faRobot}
-            className="text-[#2980B9] mt-[3px] mr-[3px]"
-          />
-          Algo
-          <span className="text-[36px] font-chakra font-bold leading-normal text-secondaryColor">
-            Minds
-          </span>
-        </h1>
+          <motion.span
+            variants={{
+              closed: { rotate: 0, y: 0 },
+              open: { rotate: 45, y: 5 },
+            }}
+            className="w-5 h-px block bg-primaryColor"
+          ></motion.span>
+          <motion.span
+            variants={{ closed: { opacity: 1 }, open: { opacity: 0 } }}
+            className="w-5 h-px block bg-primaryColor"
+          ></motion.span>
+          <motion.span
+            variants={{ closed: { rotate: 0 }, open: { rotate: -45, y: -5 } }}
+            className="w-5 h-px block bg-primaryColor"
+          ></motion.span>
+        </motion.button>
 
         {/*Mobile Navbar hidden on Larger Screens */}
         <div className="lg:hidden relative">
-          <motion.button
-            animate={mobileNav ? "open" : "closed"}
-            onClick={() => toggleMobileNav()}
-            className="absolute top-[-5px] right-[-1rem] z-[100] flex flex-col space-y-1 cursor-pointer"
-          >
-            <motion.span
-              variants={{
-                closed: { rotate: 0, y: 0 },
-                open: { rotate: 45, y: 5 },
-              }}
-              className="w-5 h-px block bg-primaryColor"
-            ></motion.span>
-            <motion.span
-              variants={{ closed: { opacity: 1 }, open: { opacity: 0 } }}
-              className="w-5 h-px block bg-primaryColor"
-            ></motion.span>
-            <motion.span
-              variants={{ closed: { rotate: 0 }, open: { rotate: -45, y: -5 } }}
-              className="w-5 h-px block bg-primaryColor"
-            ></motion.span>
-          </motion.button>
           <AnimatePresence>
             {mobileNav && (
               <motion.div
@@ -161,10 +164,9 @@ function Navbar() {
                     {user ? (
                       <>
                         {AUTH_NAV_LINKS.map((link) => (
-                          <li>
+                          <li key={link.id}>
                             <Link
                               className="text-4xl font-bold"
-                              key={link.id}
                               href={link.href}
                             >
                               {link.label}
@@ -175,10 +177,9 @@ function Navbar() {
                     ) : (
                       <>
                         {GUEST_NAV_LINKS.map((link) => (
-                          <li>
+                          <li key={link.id}>
                             <Link
                               className="text-4xl font-bold"
-                              key={link.id}
                               href={link.href}
                             >
                               {link.label}
@@ -201,7 +202,7 @@ function Navbar() {
               <div className="flex flex-row justify-center items-center gap-4">
                 <div className="flex flex-row gap-2 justify-center items-center">
                   {AUTH_NAV_LINKS.map((link) => (
-                    <Link href={link.href} key={link.id}>
+                    <Link href={link.href} key={link.label}>
                       <Button
                         className={`w-28 h-[25px] bg-transparent p-5 ${
                           pathname === link.href
@@ -233,7 +234,7 @@ function Navbar() {
                   {displayGuestNavLinks ? (
                     <>
                       {GUEST_NAV_LINKS.map((link) => (
-                        <Link href={link.href} key={link.id}>
+                        <Link href={link.href} key={link.label}>
                           <Button
                             className={`w-24 h-[25px] text-[#492B2B] bg-transparent p-5 text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
                           >
