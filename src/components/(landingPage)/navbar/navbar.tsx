@@ -101,18 +101,18 @@ function Navbar() {
       animate="visible"
       className={`flex flex-row w-full ${isLanding ? "h-28" : "h-20 py-8"}`}
     >
-      <div className="flex flex-row gap-4 w-full justify-between items-center p-8 px-16 lg:mx-24">
+      <div className="flex flex-row gap-4 w-full justify-between items-center px-8 p-8 lg:px-16 lg:mx-24">
         <div className="">
           <h1
             onClick={handleLogoClick}
-            className="flex flex-row justify-center items-start text-black text-[36px] font-chakra font-bold leading-normal button-transform hover:cursor-pointer hover:shadow-none"
+            className="flex flex-row justify-center items-start text-black text-2xl sm:text-[36px] font-chakra font-bold leading-normal button-transform hover:cursor-pointer hover:shadow-none"
           >
             <FontAwesomeIcon
               icon={faRobot}
               className="text-[#2980B9] mt-[3px] mr-[3px]"
             />
             Algo
-            <span className="text-[36px] font-chakra font-bold leading-normal text-secondaryColor">
+            <span className="font-chakra font-bold leading-normal text-secondaryColor">
               Minds
             </span>
           </h1>
@@ -121,7 +121,7 @@ function Navbar() {
         <motion.button
           animate={mobileNav ? "open" : "closed"}
           onClick={() => toggleMobileNav()}
-          className="z-[100] ml-auto flex flex-col space-y-1 cursor-pointer"
+          className="z-[100] lg:hidden ml-auto flex flex-col space-y-1 cursor-pointer"
         >
           <motion.span
             variants={{
@@ -141,7 +141,7 @@ function Navbar() {
         </motion.button>
 
         {/*Mobile Navbar hidden on Larger Screens */}
-        <div className="lg:hidden relative">
+        <div className="lg:hidden absolute">
           <AnimatePresence>
             {mobileNav && (
               <MotionConfig
@@ -175,7 +175,7 @@ function Navbar() {
                   initial="closed"
                   animate="open"
                   exit="closed"
-                  className="fixed w-full h-full inset-0 bg-white flex flex-col justify-center items-center space-y-10 p-6 z-[50]"
+                  className="fixed w-full h-full inset-0 bg-white flex flex-col justify-start items-start space-y-10 py-10 z-[50]"
                 >
                   <motion.div
                     variants={{
@@ -190,36 +190,106 @@ function Navbar() {
                         transition: { duration: 0.2 },
                       },
                     }}
+                    className="flex flex-row justify-between items-center w-full px-6"
                   >
-                    <ul className="space-y-5 flex flex-col justify-center items-center">
+                    <h1
+                      onClick={handleLogoClick}
+                      className="flex flex-row justify-center items-start text-black text-2xl sm:text-[36px] font-chakra font-bold leading-normal button-transform hover:cursor-pointer hover:shadow-none"
+                    >
+                      <FontAwesomeIcon
+                        icon={faRobot}
+                        className="text-[#2980B9] mt-[3px] mr-[3px]"
+                      />
+                      Algo
+                      <span className="font-chakra font-bold leading-normal text-secondaryColor">
+                        Minds
+                      </span>
+                    </h1>
+                  </motion.div>
+                  <motion.div
+                    className="flex-grow w-full"
+                    variants={{
+                      open: {
+                        y: "0%",
+                        opacity: 1,
+                        transition: { duration: 0.2 },
+                      },
+                      closed: {
+                        y: "25%",
+                        opacity: 0,
+                        transition: { duration: 0.2 },
+                      },
+                    }}
+                  >
+                    <motion.ul
+                      variants={{
+                        open: {
+                          y: "0%",
+                          opacity: 1,
+                          transition: { duration: 0.2 },
+                        },
+                        closed: {
+                          y: "25%",
+                          opacity: 0,
+                          transition: { duration: 0.2 },
+                        },
+                      }}
+                      className="space-y-5 flex flex-col mt-4 justify-center items-start w-full"
+                    >
                       {user ? (
                         <>
                           {AUTH_NAV_LINKS.map((link) => (
-                            <li key={link.id}>
-                              <Link
-                                className="text-4xl font-bold"
-                                href={link.href}
-                              >
-                                {link.label}
-                              </Link>
-                            </li>
+                            <Link
+                              className="border-primaryColor border-opacity-10 p-2 hover:bg-gray-100 text-2xl font-bold text-primaryColor text-opacity-90 border-b-2 w-full"
+                              key={link.id}
+                              href={link.href}
+                              onClick={() => toggleMobileNav()}
+                            >
+                              <li className="ml-2">{link.label}</li>
+                            </Link>
                           ))}
                         </>
                       ) : (
                         <>
                           {GUEST_NAV_LINKS.map((link) => (
-                            <li key={link.id}>
-                              <Link
-                                className="text-4xl font-bold"
-                                href={link.href}
-                              >
-                                {link.label}
-                              </Link>
-                            </li>
+                            <Link
+                              className="border-primaryColor border-opacity-10 p-2 hover:bg-gray-100 text-2xl font-bold text-primaryColor text-opacity-90 border-b-2 w-full"
+                              key={link.id}
+                              href={link.href}
+                              onClick={() => toggleMobileNav()}
+                            >
+                              <li className="ml-2">{link.label}</li>
+                            </Link>
                           ))}
                         </>
                       )}
-                    </ul>
+                    </motion.ul>
+                  </motion.div>
+                  <motion.div
+                    variants={{
+                      open: {
+                        y: "0%",
+                        opacity: 1,
+                        transition: { duration: 0.2 },
+                      },
+                      closed: {
+                        y: "25%",
+                        opacity: 0,
+                        transition: { duration: 0.2 },
+                      },
+                    }}
+                    className="self-end w-full left-[110px] flex flex-row justify-center items-center gap-4"
+                  >
+                    {user ? null : (
+                      <Link href="/signup">
+                        <Button
+                          onClick={() => toggleMobileNav()}
+                          className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] text-md font-medium text-sm normal-case button-transform"
+                        >
+                          Get Started
+                        </Button>
+                      </Link>
+                    )}
                   </motion.div>
                 </motion.div>
               </MotionConfig>
