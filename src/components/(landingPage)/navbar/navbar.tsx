@@ -125,7 +125,7 @@ function Navbar() {
       animate="visible"
       className={`flex flex-row w-full ${isLanding ? "h-28" : "h-20 py-8"}`}
     >
-      <div className="container mx-auto flex flex-row gap-4 justify-between items-center px-4 sm:px-6 md:px-8 lg:px-16 py-8">
+      <div className="container mx-auto flex flex-row gap-4 justify-between items-center px-4 sm:px-6 md:px-8 lg:px-24 py-8">
         <div className="">
           <h1
             onClick={handleLogoClick}
