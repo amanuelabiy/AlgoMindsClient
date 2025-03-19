@@ -112,7 +112,7 @@ function Navbar() {
           />
           Algo
           <span className="text-[36px] font-chakra font-bold leading-normal text-secondaryColor">
-            Mind
+            Minds
           </span>
         </h1>
 

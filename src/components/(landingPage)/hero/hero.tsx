@@ -8,6 +8,19 @@ import LandingPageCodeEditor from "../landingEditor/LandingPageCodeEditor";
 import { motion } from "framer-motion";
 import { container } from "@/utils/framerMotion/container";
 
+const glowVariants = {
+  initial: {
+    textShadow: "0px 0px 0px rgba(33, 167, 255, 0)", // No glow
+  },
+  animate: {
+    textShadow: "0px 0px 20px rgba(33, 167, 255, 10)", // Glowing effect
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      repeatType: "reverse" as "reverse", // Pulsating effect
+    },
+  },
+};
 function Hero() {
   return (
     <div className="flex flex-col custom-lg:flex-row custom-lg:gap-8 gap-20 justify-center items-center w-full bg-cover bg-center bg-no-repeat p-4 custom-lg:px-36 custom-lg:py-20">
@@ -19,16 +32,23 @@ function Hero() {
         className="flex flex-col mb-[4rem] gap-6 justify-center custom-lg:items-start items-center mt-12 relative custom-lg:top-[-4rem]"
       >
         <h1 className="text-black text-[46px] font-bold leading-normal text-center custom-lg:text-left max-w-[36rem] custom-lg:max-w-[54rem]">
-          Practice <span className="text-lighterBlue">Data Structures </span> &
-          <span className="text-lighterBlue"> Algorithms</span>, with{" "}
-          <span className="text-lighterBlue">AI</span>
+          Crush <span className="text-lighterBlue">Coding </span>
+          <span className="text-lighterBlue"> Interviews</span> through{" "}
+          <motion.span
+            variants={glowVariants}
+            initial="initial"
+            animate="animate"
+            className="text-lighterBlue"
+          >
+            Collaboration
+          </motion.span>
         </h1>
         <p className="text-black font-roboto font-normal leading-normal text-sm text-center custom-lg:text-left max-w-[36rem] custom-lg:max-w-2xl">
-          Master Data Structures and Algorithms with AI-powered guidance. Get
-          real-time feedback, personalized problem recommendations, and
-          AI-driven mock interviews to sharpen your skills. Level up your coding
-          prep, track your progress, and gain the confidence to ace technical
-          interviews!
+          Experience the best platform for practicing data structures and
+          algorithms in real-time with friends. Collaborate with AI-powered
+          hints, enjoy fun code rankings, and master your coding skills. Level
+          up through competitive challenges, track your progress, and prepare to
+          ace your next technical interview.
         </p>
         <div className="flex flex-col gap-8 items-center justify-center custom-lg:justify-start custom-lg:items-start">
           <Link href="/signup">

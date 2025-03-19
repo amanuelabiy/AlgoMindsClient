@@ -104,7 +104,7 @@ const LandingAIChat = ({
             </p>
             <div className="absolute top-0 left-0 w-2 h-2 bg-green-500 rounded-full"></div>
             <h1 className="text-sm font-semibold text-gray-700 text-center ml-2">
-              AlgoAI
+              AlgoMinds
             </h1>
           </div>
           <button

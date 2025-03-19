@@ -68,7 +68,7 @@ function ProPlan() {
             Pro Plan
           </h2>
           <h2 className="text-secondaryColor text-center text-3xl font-semibold leading-normal">
-            {isAnnual ? "$7.99/month" : "$9.99/month"}
+            {isAnnual ? "$9.99/month" : "$14.99/month"}
           </h2>
         </div>
         <p className="text-[#4E4E4E] text-center text-xs font-normal leading-normal max-w-[18rem] px-1">
@@ -81,18 +81,15 @@ function ProPlan() {
 
       <ul className="flex flex-col gap-2 justify-center items-center text-sm flex-grow">
         <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-extrabold leading-normal max-w-[16rem] flex flex-row items-center gap-1">
-          <FaStar className="text-lighterBlue" size={18} /> Unlimited Problem
-          Solving
+          <FaStar className="text-lighterBlue" size={18} /> Public Matchmaking
         </li>
         <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-extrabold leading-normal max-w-[14rem] flex flex-row items-start gap-1">
-          <FaStar className="text-lighterBlue" size={36} />{" "}
-          <p className="mt-1">
-            In-depth, step-by-step AI-Powered Code Insights
-          </p>
+          <FaStar className="text-lighterBlue mt-[2px]" size={18} /> Live 1:1
+          Mock Interviews
         </li>
         <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-extrabold leading-normal max-w-[16rem] flex flex-row justify-center items-start">
           <FaStar className="text-lighterBlue" size={20} />
-          Visual workspace for coding logic
+          Community Forum Access
         </li>
         <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-extrabold leading-normal max-w-[14rem] flex flex-row justify-center items-center gap-1">
           <FaStar className="text-lighterBlue" size={18} />

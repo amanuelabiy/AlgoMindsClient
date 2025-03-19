@@ -3,7 +3,7 @@ import {
   faMagnifyingGlass,
   IconDefinition,
   faComment,
-  faCompass,
+  faUserSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import ProblemsFacedBox from "./ProblemsFacedBox";
 export interface ProblemFaced {
@@ -17,17 +17,17 @@ export interface ProblemFaced {
 const problems: ProblemFaced[] = [
   {
     id: 1,
-    icon: faCompass,
-    name: "No Guidance",
+    icon: faUserSlash,
+    name: "Isolation",
     description:
-      "Decoding complex solutions alone is frustrating. Without proper guidance, you can spend hours stuck.",
+      "Interview preparation can be lonely and frustrating. It’s easy to get demotivated.",
   },
   {
     id: 2,
     icon: faComment,
     name: "No Real Interview Practice",
     description:
-      "Real interviews demand more than coding—they require clear communication and strategic questions to ask.",
+      "Real interviews demand more than coding—they require clear communication and collaboration under pressure.",
   },
   {
     id: 3,

@@ -76,7 +76,7 @@ function Login() {
         <div className="flex flex-col gap-4 items-center justify-center">
           <h2 className="text-4xl font-bold text-center">Login</h2>
           <p className="text-gray-500 text-center max-w-4xl">
-            Welcome Back to AlgoAI 👋
+            Welcome Back to AlgoMinds 👋
           </p>
         </div>
         <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
@@ -149,8 +149,8 @@ function Login() {
           <div className="flex flex-col gap-2 items-center justify-center md:justify-start mt-6">
             <p className="text-center md:text-left text-sm text-gray-500">
               If you need help, please contact{" "}
-              <Link href="mailto:support@algoai.com.">
-                <span className={styles.hyperlink}>support@algoai.com.</span>
+              <Link href="mailto:support@AlgoMinds.com.">
+                <span className={styles.hyperlink}>support@AlgoMinds.com.</span>
               </Link>
             </p>
 

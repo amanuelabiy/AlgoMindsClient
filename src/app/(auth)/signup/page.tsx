@@ -291,9 +291,9 @@ function SignUp() {
               <div className="flex flex-col gap-2 items-center justify-center md:justify-start mt-6">
                 <p className="text-center md:text-left text-sm text-gray-500">
                   If you need help, please contact{" "}
-                  <Link href="mailto:support@algoai.com.">
+                  <Link href="mailto:support@AlgoMinds.com.">
                     <span className={styles.hyperlink}>
-                      support@algoai.com.
+                      support@AlgoMinds.com.
                     </span>
                   </Link>
                 </p>

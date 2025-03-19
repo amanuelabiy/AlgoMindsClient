@@ -42,7 +42,7 @@ function Pricing() {
         <p className="text-[#2C3E50] text-center text-[14px] max-w-md font-normal leading-normal">
           🚧 <span className="font-bold">Early Development Notice:</span> Our
           pricing plans are not final and may be subject to change as we refine
-          AlgoAI. Stay tuned for updates!
+          AlgoMinds. Stay tuned for updates!
         </p>
       </motion.div>
     </div>

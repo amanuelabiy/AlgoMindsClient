@@ -43,11 +43,12 @@ function Footer() {
             />
             Algo
             <span className="text-[36px] font-chakra font-bold leading-normal text-secondaryColor">
-              Mind
+              Minds
             </span>
           </h1>
           <p className="text-primaryColor text-center sm:text-left text-[14px] font-normal leading-normal">
-            Get early access and stay ahead—be the first to experience AlgoAI!
+            Get early access and stay ahead—be the first to experience
+            AlgoMinds!
           </p>
           <div>
             <Link href={user ? "/" : "/signup"}>
@@ -67,7 +68,7 @@ function Footer() {
             ))}
           </ul>
           <h2 className="text-center justify-self-end text-secondaryColor">
-            &copy; 2025 AlgoMind. All Rights Reserved.
+            &copy; 2025 AlgoMinds. All Rights Reserved.
           </h2>
         </div>
         <div className="flex flex-col sm:flex-row md:pr-64 justify-center sm:w-1/2 sm:items-start items-center gap-8 rounded-b-[8rem] sm:rounded-bl-[0rem] sm:rounded-tr-[8rem] px-20 pt-20 pb-12">

@@ -30,19 +30,20 @@ function StarterPlan() {
       </div>
 
       <ul className="flex flex-col gap-2 justify-center items-center text-sm flex-grow">
-        <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-medium leading-normal max-w-[14rem] flex flex-row items-center gap-1">
-          <Check size={18} /> Solve up to 2 problems/day
+        <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-medium leading-normal max-w-[14rem] flex flex-row items-start gap-1">
+          <Check className="mt-[4px]" size={18} /> Private Rooms For Friends to
+          Practice DSA
         </li>
-        <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-medium leading-normal max-w-[14rem] flex flex-row items-center gap-1">
-          <Check size={18} /> Real-Time code execution
+        <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-medium leading-normal max-w-[16rem] flex flex-row items-start gap-1">
+          <Check className="mt-1" size={18} /> Real-time collaborative coding
         </li>
         <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-medium leading-normal max-w-[14rem] flex flex-row items-start gap-1">
           <Check size={24} />
-          Basic AI-Powered Code Insights
+          AI-Powered Code Insights
         </li>
         <li className="text-[rgba(44,62,80,0.70)] text-center text-base font-medium leading-normal max-w-[16rem] flex flex-row items-center gap-1">
           <Check size={18} />
-          Access to global leaderboards
+          Unlimited Problem Bank
         </li>
       </ul>
       <div className="flex justify-center flex-row items-center w-full">

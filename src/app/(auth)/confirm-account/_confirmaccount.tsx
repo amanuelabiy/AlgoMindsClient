@@ -129,9 +129,9 @@ function ConfirmAccount() {
 
               <p className="text-gray-500 text-center font-light max-w-4xl">
                 If you have any issue confirming your account please, contact{" "}
-                <Link href="mailto:support@algoai.com.">
+                <Link href="mailto:support@AlgoMinds.com.">
                   <span className="text-blue-500 underline">
-                    support@algoai.com.
+                    support@AlgoMinds.com.
                   </span>
                 </Link>
               </p>

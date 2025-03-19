@@ -14,19 +14,20 @@ function AboutUs() {
           viewport={{ once: true, amount: 0.2 }} // Amount is how much of the element should be in view before it triggers
           className="text-primaryColor sm:text-3xl text-2xl font-bold leading-normal flex-shrink-0 text-center custom-lg:text-left max-w-[36rem]"
         >
-          How We Guarantee Interview-Ready Results for Every User
+          How We Empower Collaborative, Interview-Ready Results
         </motion.h1>
         <motion.p
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="text-[#737070] sm:text-base text-xs font-normal leading-normal tracking-[0.8px] text-center custom-lg:text-left max-w-[36rem]"
+          className="text-[#737070] text-xs font-normal leading-normal tracking-[0.8px] text-center custom-lg:text-left max-w-[36rem]"
         >
-          AlgoAI is redefining technical interview prep by harnessing the power
-          of AI to provide instant feedback, personalized insights, and
-          real-time coding assistance. As software engineers, we know the
-          struggle.
+          AlgoMinds is redefining technical interview prep by merging real-time
+          collaboration with AI-driven feedback. We believe that learning
+          together, discussing solutions, and getting immediate feedback not
+          only makes coding more fun, but also drastically improves your
+          readiness for real interviews.
         </motion.p>
         <div className="md:mt-8 flex flex-col gap-2 justify-center md:items-start items-center">
           <motion.p
@@ -40,8 +41,8 @@ function AboutUs() {
             }}
             className="text-[#737070] italic text-xs leading-normal tracking-[0.8px] text-center custom-lg:text-left max-w-[36rem]"
           >
-            <span className="">✅</span> AI-driven feedback is exactly what I've
-            been looking for—can't wait to try AlgoAI!
+            <span className="">✅</span> Collaborative coding challenges are a
+            game-changer—can’t wait to try AlgoMinds!
           </motion.p>
           <motion.p
             initial={{ opacity: 0, scale: 0 }}
@@ -54,8 +55,8 @@ function AboutUs() {
             }}
             className="text-[#737070] italic text-xs leading-normal tracking-[0.8px] text-center custom-lg:text-left max-w-[36rem]"
           >
-            <span className="">✅</span> "Real interview practice is what’s
-            missing from most platforms—AlgoAI looks like the solution!"
+            <span className="">✅</span> "Finally, a platform that makes coding
+            interviews feel like a team sport—so helpful!"
           </motion.p>
           <motion.p
             initial={{ opacity: 0, scale: 0 }}
@@ -68,8 +69,8 @@ function AboutUs() {
             }}
             className="text-[#737070] italic text-xs leading-normal tracking-[0.8px] text-center custom-lg:text-left max-w-[36rem]"
           >
-            <span className="">✅</span> "I've always wanted a tutor by my side
-            to stay focused and motivated."
+            <span className="">✅</span> "All the motivation of a study group,
+            plus the power of AI hints and feedback!"
           </motion.p>
         </div>
       </div>
@@ -99,9 +100,9 @@ function AboutUs() {
               Smart Code Insights
             </h1>
             <p className="text-[#4E4E4E] text-xs font-normal leading-normal max-w-lg sm:text-[14px]">
-              AI-driven feedback, optimized solutions, and step-by-step
-              explanations to improve your problem-solving skills and coding
-              efficiency.
+              AI-driven feedback for you and your friends, optimized solutions,
+              and step-by-step explanations to improve your group's
+              problem-solving skills and coding efficiency.
             </p>
           </div>
         </motion.div>
@@ -119,7 +120,7 @@ function AboutUs() {
           <div className="bg-white p-2 ml-4">
             <Image
               alt="clock"
-              src="/assets/images/clock.svg"
+              src="/assets/images/retreat.png"
               width={65}
               height={100}
               objectFit="contain"
@@ -128,12 +129,12 @@ function AboutUs() {
           </div>
           <div className="mt-6">
             <h1 className="flex-shrink-0 text-primaryColor text-left font-bold leading-normal sm:text-xl text-md ">
-              Realistic Interview Practice
+              Fun & Interactive Challenges
             </h1>
             <p className="text-[#4E4E4E] font-chakra text-xs font-normal leading-normal max-w-lg sm:text-[14px]">
-              Simulate real coding interviews with AI-generated hints, time
-              tracking, and in-depth performance analysis to help you ace the
-              real thing.
+              Join friends in energetic coding battles, tackle real-world
+              interview problems, learn faster, laugh louder, and level up your
+              skills with every challenge!
             </p>
           </div>
         </motion.div>
@@ -160,12 +161,12 @@ function AboutUs() {
           </div>
           <div className="mt-6">
             <h1 className="flex-shrink-0 text-primaryColor text-left font-bold leading-normal sm:text-xl text-md">
-              Guided Learning
+              Leaderboards & Progression
             </h1>
             <p className="text-[#4E4E4E] font-chakra text-xs font-normal leading-normal max-w-lg sm:text-[14px]">
-              Follow structured, AI-curated learning paths that adapt to your
-              skill level, keeping you focused on the right problems at the
-              right time.
+              Track your coding journey with fun leaderboards and measurable
+              milestones. Challenge friends, climb the ranks, and stay motivated
+              to reach your next level.
             </p>
           </div>
         </motion.div>
