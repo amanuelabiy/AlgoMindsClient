@@ -15,7 +15,7 @@ import { CiSettings } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
-import { motion, useCycle, AnimatePresence } from "framer-motion";
+import { motion, useCycle, AnimatePresence, MotionConfig } from "framer-motion";
 import { container } from "@/utils/framerMotion/container";
 
 function Navbar() {
@@ -101,7 +101,7 @@ function Navbar() {
       animate="visible"
       className={`flex flex-row w-full ${isLanding ? "h-28" : "h-20 py-8"}`}
     >
-      <div className="flex flex-row w-full justify-between items-center p-8 px-16 lg:mx-24">
+      <div className="flex flex-row gap-4 w-full justify-between items-center p-8 px-16 lg:mx-24">
         <div className="">
           <h1
             onClick={handleLogoClick}
@@ -144,53 +144,85 @@ function Navbar() {
         <div className="lg:hidden relative">
           <AnimatePresence>
             {mobileNav && (
-              <motion.div
-                key="mobile-nav"
-                variants={{
-                  open: {
-                    x: "0%",
-                  },
-                  closed: {
-                    x: "-100%",
-                  },
+              <MotionConfig
+                transition={{
+                  type: "spring",
+                  bounce: 0.099,
                 }}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="fixed w-full h-full inset-0 bg-white flex flex-col justify-center items-center space-y-10 p-6 z-[50]"
               >
-                <div>
-                  <ul className="space-y-5 flex flex-col justify-center items-center">
-                    {user ? (
-                      <>
-                        {AUTH_NAV_LINKS.map((link) => (
-                          <li key={link.id}>
-                            <Link
-                              className="text-4xl font-bold"
-                              href={link.href}
-                            >
-                              {link.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </>
-                    ) : (
-                      <>
-                        {GUEST_NAV_LINKS.map((link) => (
-                          <li key={link.id}>
-                            <Link
-                              className="text-4xl font-bold"
-                              href={link.href}
-                            >
-                              {link.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </>
-                    )}
-                  </ul>
-                </div>
-              </motion.div>
+                <motion.div
+                  key="mobile-nav"
+                  variants={{
+                    open: {
+                      x: "0%",
+                      transition: {
+                        type: "spring",
+                        bounce: 0.099,
+                        when: "beforeChildren",
+                        duration: 0.2,
+                      },
+                    },
+                    closed: {
+                      x: "-100%",
+                      transition: {
+                        type: "spring",
+                        bounce: 0.099,
+                        when: "afterChildren",
+                        duration: 0.2,
+                      },
+                    },
+                  }}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  className="fixed w-full h-full inset-0 bg-white flex flex-col justify-center items-center space-y-10 p-6 z-[50]"
+                >
+                  <motion.div
+                    variants={{
+                      open: {
+                        y: "0%",
+                        opacity: 1,
+                        transition: { duration: 0.2 },
+                      },
+                      closed: {
+                        y: "25%",
+                        opacity: 0,
+                        transition: { duration: 0.2 },
+                      },
+                    }}
+                  >
+                    <ul className="space-y-5 flex flex-col justify-center items-center">
+                      {user ? (
+                        <>
+                          {AUTH_NAV_LINKS.map((link) => (
+                            <li key={link.id}>
+                              <Link
+                                className="text-4xl font-bold"
+                                href={link.href}
+                              >
+                                {link.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </>
+                      ) : (
+                        <>
+                          {GUEST_NAV_LINKS.map((link) => (
+                            <li key={link.id}>
+                              <Link
+                                className="text-4xl font-bold"
+                                href={link.href}
+                              >
+                                {link.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </>
+                      )}
+                    </ul>
+                  </motion.div>
+                </motion.div>
+              </MotionConfig>
             )}
           </AnimatePresence>
         </div>
