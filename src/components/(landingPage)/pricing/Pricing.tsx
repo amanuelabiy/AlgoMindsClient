@@ -11,7 +11,10 @@ import {
 
 function Pricing() {
   return (
-    <div className="flex flex-col justify-center gap-8 items-center bg-transparent pt-20 pb-10 px-20">
+    <div
+      id="pricing"
+      className="flex flex-col justify-center gap-8 items-center bg-transparent pt-20 pb-10 px-20"
+    >
       <motion.div
         variants={pricingTextContainer(0.2)}
         initial="hidden"

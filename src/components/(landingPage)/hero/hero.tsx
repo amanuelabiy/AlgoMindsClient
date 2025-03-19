@@ -31,16 +31,16 @@ function Hero() {
         animate="visible"
         className="flex flex-col mb-[4rem] gap-6 justify-center custom-lg:items-start items-center mt-12 relative custom-lg:top-[-4rem]"
       >
-        <h1 className="text-black text-[46px] font-bold leading-normal text-center custom-lg:text-left max-w-[36rem] custom-lg:max-w-[54rem]">
-          Crush <span className="text-lighterBlue">Coding </span>
-          <span className="text-lighterBlue"> Interviews</span> through{" "}
+        <h1 className="text-black text-[40px] font-bold leading-normal text-center custom-lg:text-left max-w-[36rem] custom-lg:max-w-[54rem]">
+          Ace Your <span className="text-lighterBlue">Coding</span>{" "}
+          <span className="text-lighterBlue">Interviews</span> with{" "}
           <motion.span
             variants={glowVariants}
             initial="initial"
             animate="animate"
             className="text-lighterBlue"
           >
-            Collaboration
+            Real-Time Collaboration
           </motion.span>
         </h1>
         <p className="text-black font-roboto font-normal leading-normal text-sm text-center custom-lg:text-left max-w-[36rem] custom-lg:max-w-2xl">
@@ -79,7 +79,7 @@ function Hero() {
       </motion.div>
 
       {/* Right Image Section */}
-      <div className="flex flex-col pt-0 justify-center items-center max-w-[40rem] max-h-[45rem] custom-lg:w-[85%] md:w-[75%] w-full relative custom-lg:top-[-4rem] custom-lg:right-[-4rem] overflow-hidden">
+      <div className="flex flex-col pt-0 justify-center items-center max-w-[40rem] max-h-[47rem] custom-lg:w-[85%] md:w-[75%] w-full relative custom-lg:top-[-4rem] custom-lg:right-[-4rem] overflow-hidden">
         <LandingPageCodeEditor />
       </div>
     </div>

@@ -20,10 +20,35 @@ import { container } from "@/utils/framerMotion/container";
 
 function Navbar() {
   const { user, isLoading, refetch, setUser } = useAuthContext();
+
   const [mounted, setMounted] = useState<boolean>(false);
 
   const router = useRouter();
   const pathname = usePathname();
+
+  // Smooth Scroll
+  const handleGuestNavClick = (link: string) => {
+    // If the link is the home page, scroll to the top
+    if (link === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    let navLink;
+
+    const isHash = link.startsWith("#");
+    const isLink = link.startsWith("/");
+
+    // If the link starts with #, scroll to the element with the id
+    if (isHash) {
+      navLink = link.slice(1);
+      document.getElementById(navLink)?.scrollIntoView({ behavior: "smooth" });
+    } else if (isLink) {
+      // If valid link, push to the link
+      router.push(link);
+    } else {
+      return;
+    }
+  };
 
   // Mobile Navbar Animation
   const [mobileNav, toggleMobileNav] = useCycle(false, true);
@@ -90,7 +115,6 @@ function Navbar() {
   };
 
   const displayButtons = !isLoading && mounted;
-  const checkpoint = "";
   const isLanding = pathname === "/";
 
   const displayGuestNavLinks = !user && displayButtons && isLanding;
@@ -101,7 +125,7 @@ function Navbar() {
       animate="visible"
       className={`flex flex-row w-full ${isLanding ? "h-28" : "h-20 py-8"}`}
     >
-      <div className="flex flex-row gap-4 w-full justify-between items-center px-8 p-8 lg:px-16 lg:mx-24">
+      <div className="container mx-auto flex flex-row gap-4 justify-between items-center px-4 sm:px-6 md:px-8 lg:px-16 py-8">
         <div className="">
           <h1
             onClick={handleLogoClick}
@@ -234,7 +258,7 @@ function Navbar() {
                           transition: { duration: 0.2 },
                         },
                       }}
-                      className="space-y-5 flex flex-col mt-4 justify-center items-start w-full"
+                      className="space-y-0 flex flex-col mt-4 justify-center items-start w-full"
                     >
                       {user ? (
                         <>
@@ -245,21 +269,23 @@ function Navbar() {
                               href={link.href}
                               onClick={() => toggleMobileNav()}
                             >
-                              <li className="ml-2">{link.label}</li>
+                              <li className="">{link.label}</li>
                             </Link>
                           ))}
                         </>
                       ) : (
                         <>
                           {GUEST_NAV_LINKS.map((link) => (
-                            <Link
-                              className="border-primaryColor border-opacity-10 p-2 hover:bg-gray-100 text-2xl font-bold text-primaryColor text-opacity-90 border-b-2 w-full"
+                            <div
+                              className="border-primaryColor h-full hover:cursor-pointer border-opacity-10 p-2 hover:bg-gray-100 text-2xl font-bold text-primaryColor text-opacity-90 border-b-2 w-full"
                               key={link.id}
-                              href={link.href}
-                              onClick={() => toggleMobileNav()}
+                              onClick={() => {
+                                handleGuestNavClick(link.href);
+                                toggleMobileNav();
+                              }}
                             >
                               <li className="ml-2">{link.label}</li>
-                            </Link>
+                            </div>
                           ))}
                         </>
                       )}
@@ -336,13 +362,13 @@ function Navbar() {
                   {displayGuestNavLinks ? (
                     <>
                       {GUEST_NAV_LINKS.map((link) => (
-                        <Link href={link.href} key={link.label}>
-                          <Button
-                            className={`w-24 h-[25px] text-[#492B2B] bg-transparent p-5 text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
-                          >
-                            {link.label}
-                          </Button>
-                        </Link>
+                        <Button
+                          onClick={() => handleGuestNavClick(link.href)}
+                          key={link.label}
+                          className={`w-24 h-[25px] text-[#492B2B] bg-transparent p-5 text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
+                        >
+                          {link.label}
+                        </Button>
                       ))}
                     </>
                   ) : null}

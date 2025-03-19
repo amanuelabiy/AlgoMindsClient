@@ -5,7 +5,10 @@ import { motion } from "framer-motion";
 
 function AboutUs() {
   return (
-    <div className="flex custom-lg:flex-row flex-col justify-center items-center custom-lg:gap-8 gap-0 md:px-24 px-4 py-24 w-full">
+    <div
+      id="about"
+      className="flex custom-lg:flex-row flex-col justify-center items-center custom-lg:gap-8 gap-0 md:px-24 px-4 py-24 w-full"
+    >
       <div className="flex flex-col justify-center items-center md:items-start px-10 gap-4 pb-12 md:mt-8">
         <motion.h1
           initial={{ x: -100, opacity: 0 }}

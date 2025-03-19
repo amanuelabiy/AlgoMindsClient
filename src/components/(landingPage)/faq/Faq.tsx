@@ -8,7 +8,10 @@ import { faqTextContainer } from "@/utils/framerMotion/container";
 
 function Faq() {
   return (
-    <div className="flex flex-col justify-center items-center gap-12 custom-lg:px-[20rem] px-4 pt-20 pb-20">
+    <div
+      id="faq"
+      className="flex flex-col justify-center items-center gap-12 custom-lg:px-[20rem] px-4 pt-20 pb-20"
+    >
       {" "}
       <motion.div
         variants={faqTextContainer(0.2)}
