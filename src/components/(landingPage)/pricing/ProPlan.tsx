@@ -1,13 +1,28 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Switch from "./Switch";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
+const generateSparklePositions = (count: number) => {
+  return Array.from({ length: count }).map(() => ({
+    top: `${Math.random() * 100}%`,
+    left: `${Math.random() * 100}%`,
+    delay: Math.random() * 2,
+    duration: Math.random() * 1.5 + 0.5,
+  }));
+};
 
 function ProPlan() {
   const [isAnnual, setIsAnnual] = useState(true);
+  const [sparkles, setSparkles] = useState<
+    { top: string; left: string; delay: number; duration: number }[]
+  >([]);
+
+  useEffect(() => {
+    setSparkles(generateSparklePositions(10));
+  }, []);
 
   return (
     <motion.div
@@ -41,20 +56,20 @@ function ProPlan() {
               ease: "easeInOut",
             }}
           >
-            {Array.from({ length: 10 }).map((_, i) => (
+            {sparkles.map((sparkle, i) => (
               <motion.div
                 key={i}
                 className="absolute w-2 h-2 bg-white rounded-full"
                 style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
+                  top: sparkle.top,
+                  left: sparkle.left,
                 }}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
                 transition={{
-                  duration: Math.random() * 1.5 + 0.5,
+                  duration: sparkle.duration,
                   repeat: Infinity,
-                  delay: Math.random() * 2,
+                  delay: sparkle.delay,
                   ease: "easeInOut",
                 }}
               />

@@ -88,9 +88,7 @@ function ConfirmAccount() {
           <div className="flex flex-col gap-4 items-center justify-center">
             <h1 className="text-secondaryColor font-roboto text-5xl font-medium tracking-wider animate-bounce">
               Algo
-              <span className="font-roboto text-5xl font-extrabold">
-                Rivals
-              </span>
+              <span className="font-roboto text-5xl font-extrabold">Minds</span>
             </h1>
             <h2 className="text-3xl font-bold text-center">
               Account Confirmation
@@ -131,7 +129,7 @@ function ConfirmAccount() {
                 If you have any issue confirming your account please, contact{" "}
                 <Link href="mailto:support@AlgoMinds.com.">
                   <span className="text-blue-500 underline">
-                    support@AlgoMinds.com.
+                    support@algominds.com.
                   </span>
                 </Link>
               </p>

@@ -2,9 +2,8 @@
 
 import useAuth from "@/app/hooks/useAuth";
 import DefaultSkeleton from "@/components/loadingStates/Landing/DefaultSkeleton";
-import { APIRefresh, isTokenExpired } from "@/lib/axios-client";
-import { loadingSkeletons } from "@/utils/loading/loadingSkeleton";
-import { useRouter } from "next/navigation";
+import { APIRefresh } from "@/lib/axios-client";
+import { usePathname, useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type UserPrefrences = {
@@ -17,7 +16,7 @@ type UserPrefrences = {
   updatedAt: string;
 };
 
-type User = {
+export type User = {
   id: string;
   firstName: string;
   lastName: string;
@@ -39,9 +38,7 @@ type AuthContextType = {
   setUser: (user: User | null) => void;
 };
 
-const protectedRoutes = ["/sessions", "/problems", "/settings"];
 const publicRoutes = [
-  "/",
   "/login",
   "/signup",
   "/confirm-account",
@@ -56,73 +53,44 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [refreshing, setRefreshing] = useState(true);
   const { data: clientUser, error, isLoading, isFetching, refetch } = useAuth();
-  const [refreshLoading, setRefreshLoading] = useState(false);
-  const [hasRefreshed, setHasRefreshed] = useState(false);
+  const pathname = usePathname();
   const router = useRouter();
-  const [pathname, setPathname] = useState<string | null>(null);
-
-  const theClientUser = clientUser?.data.user;
 
   useEffect(() => {
     if (clientUser) {
-      setUser(theClientUser);
+      setUser(clientUser.data.user);
     }
   }, [clientUser]);
 
   useEffect(() => {
-    setPathname(window.location.pathname);
-  }, []);
-
-  const getAccessToken = () => {
-    return document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("accessToken="))
-      ?.split("=")[1];
-  };
-
-  useEffect(() => {
-    const accessToken = getAccessToken();
-
-    const handleRefresh = async () => {
-      if (hasRefreshed) return;
-
+    const refreshSession = async () => {
       try {
-        setRefreshLoading(true);
-        await APIRefresh.get("/auth/refresh");
-        await refetch();
-        setHasRefreshed(true);
-        setRefreshLoading(false);
+        if (!clientUser) {
+          // Attempt to Refresh Token if it exists
+          const response = await APIRefresh.get("/auth/refresh");
+          if (response?.data?.accessToken) {
+            console.log("Token refreshed successfully!");
+            await refetch(); // **Wait for refetch to complete**
+          } else {
+          }
+          // We only check public routes because middleware will redirect to home if user is not authenticated
+          if (pathname && publicRoutes.includes(pathname)) {
+            router.replace("/");
+          }
+        }
       } catch (error) {
-        console.log("Failed to refresh token", error);
-        setRefreshLoading(false);
+        console.log("Session refresh failed, user is not authenticated.");
+      } finally {
+        setRefreshing(false);
       }
     };
 
-    if (accessToken && isTokenExpired(accessToken) && !hasRefreshed) {
-      handleRefresh();
-    }
-  }, [hasRefreshed, refetch]);
+    refreshSession();
+  }, [clientUser]);
 
-  useEffect(() => {
-    const currentPath = window.location.pathname;
-
-    if (!isLoading && !refreshLoading) {
-      if (!theClientUser && protectedRoutes.includes(currentPath)) {
-        router.replace("/");
-      } else if (theClientUser && publicRoutes.includes(currentPath)) {
-        router.replace("/problems");
-      }
-    }
-  }, [theClientUser, isLoading, refreshLoading, router]);
-
-  const SkeletonComponent = pathname
-    ? loadingSkeletons[pathname] ?? DefaultSkeleton
-    : DefaultSkeleton;
-
-  if (isLoading || refreshLoading) {
-    return <SkeletonComponent />;
-  }
+  if (refreshing || isLoading) return <DefaultSkeleton />;
 
   return (
     <AuthContext.Provider

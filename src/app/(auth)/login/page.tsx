@@ -53,7 +53,7 @@ function Login() {
         if (response.data.mfaRequired) {
           router.replace(`/verify-mfa?email=${data.email}`);
         }
-        setUser(response.data);
+        setUser(response.data.data);
         router.replace("/waitlist");
       },
       onError: (error) => {

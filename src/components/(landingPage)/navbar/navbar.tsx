@@ -17,6 +17,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
 import { motion, useCycle, AnimatePresence, MotionConfig } from "framer-motion";
 import { container } from "@/utils/framerMotion/container";
+import { getInitials } from "@/utils/navbar/getInitials";
+import UserProfilePicture from "./UserProfilePicture";
 
 function Navbar() {
   const { user, isLoading, refetch, setUser } = useAuthContext();
@@ -74,8 +76,8 @@ function Navbar() {
       localStorage.clear();
     },
     onSuccess: async () => {
-      refetch();
       setUser(null);
+      await refetch();
       router.replace("/");
     },
   });
@@ -85,29 +87,7 @@ function Navbar() {
   }, []);
 
   const handleLogoClick = async (e: React.MouseEvent) => {
-    if (!user) {
-      router.push("/");
-    }
-
-    e.preventDefault();
-
-    const accessToken = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("accessToken="))
-      ?.split("=")[1];
-
-    if (isTokenExpired(accessToken)) {
-      try {
-        await APIRefresh.get("/auth/refresh");
-        await refetch();
-        router.push("/problems");
-      } catch (error) {
-        console.log("Failed to refresh token", error);
-        router.push("/");
-      }
-    } else {
-      router.push("/problems");
-    }
+    router.push("/");
   };
 
   const handleLogoutClick = async () => {
@@ -117,7 +97,8 @@ function Navbar() {
   const displayButtons = !isLoading && mounted;
   const isLanding = pathname === "/";
 
-  const displayGuestNavLinks = !user && displayButtons && isLanding;
+  const displayGuestNavLinks = displayButtons && isLanding;
+  const displayProfilePicture = isLanding && user;
   return (
     <motion.nav
       variants={isLanding ? container(0) : undefined}
@@ -260,35 +241,18 @@ function Navbar() {
                       }}
                       className="space-y-0 flex flex-col mt-4 justify-center items-start w-full"
                     >
-                      {user ? (
-                        <>
-                          {AUTH_NAV_LINKS.map((link) => (
-                            <Link
-                              className="border-primaryColor border-opacity-10 p-2 hover:bg-gray-100 text-2xl font-bold text-primaryColor text-opacity-90 border-b-2 w-full"
-                              key={link.id}
-                              href={link.href}
-                              onClick={() => toggleMobileNav()}
-                            >
-                              <li className="">{link.label}</li>
-                            </Link>
-                          ))}
-                        </>
-                      ) : (
-                        <>
-                          {GUEST_NAV_LINKS.map((link) => (
-                            <div
-                              className="border-primaryColor h-full hover:cursor-pointer border-opacity-10 p-2 hover:bg-gray-100 text-2xl font-bold text-primaryColor text-opacity-90 border-b-2 w-full"
-                              key={link.id}
-                              onClick={() => {
-                                handleGuestNavClick(link.href);
-                                toggleMobileNav();
-                              }}
-                            >
-                              <li className="ml-2">{link.label}</li>
-                            </div>
-                          ))}
-                        </>
-                      )}
+                      <>
+                        {GUEST_NAV_LINKS.map((link) => (
+                          <Link
+                            className="border-primaryColor border-opacity-10 p-2 hover:bg-gray-100 text-2xl font-bold text-primaryColor text-opacity-90 border-b-2 w-full"
+                            key={link.id}
+                            href={link.href}
+                            onClick={() => toggleMobileNav()}
+                          >
+                            <li className="">{link.label}</li>
+                          </Link>
+                        ))}
+                      </>
                     </motion.ul>
                   </motion.div>
                   <motion.div
@@ -306,7 +270,13 @@ function Navbar() {
                     }}
                     className="self-end w-full left-[110px] flex flex-row justify-center items-center gap-4"
                   >
-                    {user ? null : (
+                    {user ? (
+                      <UserProfilePicture
+                        handleLogoutClick={handleLogoutClick}
+                        user={user}
+                        toggleMobileNav={toggleMobileNav}
+                      />
+                    ) : (
                       <Link href="/signup">
                         <Button
                           onClick={() => toggleMobileNav()}
@@ -326,64 +296,37 @@ function Navbar() {
         {/**Sign Up and Login Buttons Hidden on Larger Screens*/}
         {displayButtons && (
           <div className="hidden lg:flex flex-row gap-4">
-            {user ? (
-              <div className="flex flex-row justify-center items-center gap-4">
-                <div className="flex flex-row gap-2 justify-center items-center">
-                  {AUTH_NAV_LINKS.map((link) => (
-                    <Link href={link.href} key={link.label}>
+            <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-row justify-between items-center ml-[4rem] mr-[4rem] custom-lg:ml-[0rem] custom-lg:mr-[8rem]">
+                {displayGuestNavLinks ? (
+                  <>
+                    {GUEST_NAV_LINKS.map((link) => (
                       <Button
-                        className={`w-28 h-[25px] bg-transparent p-5 ${
-                          pathname === link.href
-                            ? "text-white"
-                            : "text-gray-400"
-                        } text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
+                        onClick={() => handleGuestNavClick(link.href)}
+                        key={link.label}
+                        className={`w-24 h-[25px] text-[#492B2B] bg-transparent p-5 text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
                       >
                         {link.label}
                       </Button>
-                    </Link>
-                  ))}
-                </div>
-
-                <div className="flex flex-row justify-center items-center gap-4">
-                  <IoMdNotificationsOutline className="w-6 h-6 text-white hover:cursor-pointer hover:bg-transparent button-transform shadow-none hover:shadow-none" />
-                  <CiSettings className="w-6 h-6 text-white hover:cursor-pointer hover:bg-transparent button-transform shadow-none hover:shadow-none" />
-                  <Avatar className="w-8 h-8 hover:cursor-pointer hover:bg-transparent button-transform shadow-none hover:shadow-none">
-                    <AvatarImage
-                      src="https://github.com/shadcn.png"
-                      alt="@shadcn"
-                    />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-row justify-between items-center">
-                <div className="flex flex-row justify-between items-center ml-[4rem] mr-[4rem] custom-lg:ml-[0rem] custom-lg:mr-[8rem]">
-                  {displayGuestNavLinks ? (
-                    <>
-                      {GUEST_NAV_LINKS.map((link) => (
-                        <Button
-                          onClick={() => handleGuestNavClick(link.href)}
-                          key={link.label}
-                          className={`w-24 h-[25px] text-[#492B2B] bg-transparent p-5 text-md font-medium leading-[20px] normal-case hover:bg-transparent button-transform shadow-none hover:shadow-none`}
-                        >
-                          {link.label}
-                        </Button>
-                      ))}
-                    </>
-                  ) : null}
-                </div>{" "}
-                {isLanding ? (
-                  <>
-                    <Link href="/signup">
-                      <Button className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] text-md font-medium text-sm normal-case button-transform">
-                        Get Started
-                      </Button>
-                    </Link>
+                    ))}
                   </>
                 ) : null}
-              </div>
-            )}
+              </div>{" "}
+              {displayProfilePicture ? (
+                <UserProfilePicture
+                  user={user}
+                  handleLogoutClick={handleLogoutClick}
+                />
+              ) : isLanding ? (
+                <>
+                  <Link href="/signup">
+                    <Button className="w-28 h-[25px] hover:bg-secondaryColor bg-secondaryColor p-5 text-[#F5F5F5] text-md font-medium text-sm normal-case button-transform">
+                      Get Started
+                    </Button>
+                  </Link>
+                </>
+              ) : null}
+            </div>
           </div>
         )}
       </div>
