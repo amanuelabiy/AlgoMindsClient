@@ -1,6 +1,6 @@
 "use client";
 
-import ConfirmAccountSuccessMessage from "@/components/auth/confirmAccount/ConfirmAccountSuccessMessage";
+import VerifyEmailSuccessMessage from "@/components/auth/verifyEmail/VerifyEmailSuccessMessage";
 import { Button } from "@/components/ui/button";
 import { resendEmailMutationFn, verifyEmailMutationFn } from "@/lib/auth/api";
 import { useMutation } from "@tanstack/react-query";
@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
-function ConfirmAccount() {
+function VerifyEmail() {
   /*Whole Component Error Messages */
   const [errorMessage, setErrorMessage] = useState<string>("");
   /*Resend Email Success Message */
@@ -34,7 +34,7 @@ function ConfirmAccount() {
     e.preventDefault();
 
     if (!code) {
-      setErrorMessage("Confirmation token not found");
+      setErrorMessage("Verification token not found");
       return;
     }
 
@@ -55,7 +55,7 @@ function ConfirmAccount() {
 
   const handleResendEmail = () => {
     if (!code) {
-      setErrorMessage("Confirmation token not found");
+      setErrorMessage("Verification token not found");
       return;
     }
     resendEmail(
@@ -83,7 +83,7 @@ function ConfirmAccount() {
       <div className="w-full max-w-md rounded-lg p-6">
         {" "}
         {isSuccess ? (
-          <ConfirmAccountSuccessMessage />
+          <VerifyEmailSuccessMessage />
         ) : (
           <div className="flex flex-col gap-4 items-center justify-center">
             <h1 className="text-secondaryColor font-roboto text-5xl font-medium tracking-wider animate-bounce">
@@ -91,7 +91,7 @@ function ConfirmAccount() {
               <span className="font-roboto text-5xl font-extrabold">Minds</span>
             </h1>
             <h2 className="text-3xl font-bold text-center">
-              Account Confirmation
+              Email Verification
             </h2>
             {errorMessage ? (
               <span className="text-red-500 text-center">{errorMessage}</span>
@@ -101,7 +101,7 @@ function ConfirmAccount() {
               </p>
             ) : (
               <p className="text-gray-500 font-light text-center">
-                To confirm your account, please click the button below.
+                To verify your email, please click the button below.
               </p>
             )}
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -126,7 +126,7 @@ function ConfirmAccount() {
               </div>
 
               <p className="text-gray-500 text-center font-light max-w-4xl">
-                If you have any issue confirming your account please, contact{" "}
+                If you have any issue verifying your email please, contact{" "}
                 <Link href="mailto:support@AlgoMinds.com.">
                   <span className="text-blue-500 underline">
                     support@algominds.com.
@@ -141,4 +141,4 @@ function ConfirmAccount() {
   );
 }
 
-export default ConfirmAccount;
+export default VerifyEmail;

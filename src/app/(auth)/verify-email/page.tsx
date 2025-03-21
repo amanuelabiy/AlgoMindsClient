@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
-import ConfirmAccount from "./_confirmaccount";
+import VerifyEmail from "./_verifyemail";
 function Page() {
   return (
     <Suspense>
-      <ConfirmAccount />
+      <VerifyEmail />
     </Suspense>
   );
 }

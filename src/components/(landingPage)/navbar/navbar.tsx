@@ -76,8 +76,8 @@ function Navbar() {
       localStorage.clear();
     },
     onSuccess: async () => {
+      refetch();
       setUser(null);
-      await refetch();
       router.replace("/");
     },
   });

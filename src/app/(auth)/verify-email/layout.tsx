@@ -1,6 +1,6 @@
 import React from "react";
 
-function ConfirmAccountLayout({
+function VerifyEmailLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -8,4 +8,4 @@ function ConfirmAccountLayout({
   );
 }
 
-export default ConfirmAccountLayout;
+export default VerifyEmailLayout;

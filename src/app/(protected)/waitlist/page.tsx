@@ -1,6 +1,8 @@
+import API from "@/lib/axios-client";
+
 import React from "react";
 
-function WaitListPage() {
+async function WaitListPage() {
   return <div>WaitListPage</div>;
 }
 

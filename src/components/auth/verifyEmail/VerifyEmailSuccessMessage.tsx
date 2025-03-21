@@ -4,7 +4,7 @@ import React from "react";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { TiArrowRight } from "react-icons/ti";
 
-function ConfirmAccountSuccessMessage() {
+function VerifyEmailSuccessMessage() {
   return (
     <div className="flex flex-col justify-center items-center gap-4">
       <h1 className="text-[6rem] text-secondaryColor">
@@ -28,4 +28,4 @@ function ConfirmAccountSuccessMessage() {
   );
 }
 
-export default ConfirmAccountSuccessMessage;
+export default VerifyEmailSuccessMessage;

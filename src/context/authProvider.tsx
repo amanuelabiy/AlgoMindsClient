@@ -35,62 +35,22 @@ type AuthContextType = {
   isLoading: boolean;
   isFetching: boolean;
   refetch: () => void;
-  setUser: (user: User | null) => void;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
-
-const publicRoutes = [
-  "/login",
-  "/signup",
-  "/confirm-account",
-  "forgot-password",
-  "reset-password",
-  "/verify-mfa",
-];
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [refreshing, setRefreshing] = useState(true);
-  const { data: clientUser, error, isLoading, isFetching, refetch } = useAuth();
-  const pathname = usePathname();
-  const router = useRouter();
+  const { data, error, isLoading, isFetching, refetch } = useAuth();
+  const [user, setUser] = useState<User | null>(data?.data?.user ?? null);
 
   useEffect(() => {
-    if (clientUser) {
-      setUser(clientUser.data.user);
+    if (data?.data?.user) {
+      setUser(data.data.user);
     }
-  }, [clientUser]);
-
-  useEffect(() => {
-    const refreshSession = async () => {
-      try {
-        if (!clientUser) {
-          // Attempt to Refresh Token if it exists
-          const response = await APIRefresh.get("/auth/refresh");
-          if (response?.data?.accessToken) {
-            console.log("Token refreshed successfully!");
-            await refetch(); // **Wait for refetch to complete**
-          } else {
-          }
-          // We only check public routes because middleware will redirect to home if user is not authenticated
-          if (pathname && publicRoutes.includes(pathname)) {
-            router.replace("/");
-          }
-        }
-      } catch (error) {
-        console.log("Session refresh failed, user is not authenticated.");
-      } finally {
-        setRefreshing(false);
-      }
-    };
-
-    refreshSession();
-  }, [clientUser]);
-
-  if (refreshing || isLoading) return <DefaultSkeleton />;
+  }, [data]);
 
   return (
     <AuthContext.Provider

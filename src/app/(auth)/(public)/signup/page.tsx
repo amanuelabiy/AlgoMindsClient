@@ -12,6 +12,7 @@ import { registerSchema } from "@/schema/auth-schema";
 import { TiArrowRight, TiArrowLeft } from "react-icons/ti";
 import { useMutation } from "@tanstack/react-query";
 import VerifyEmailCard from "@/components/auth/signup/VerifyEmailCard";
+import { useAuthContext } from "@/context/authProvider";
 
 const styles = {
   input:
@@ -22,6 +23,8 @@ const styles = {
 };
 
 function SignUp() {
+  const { refetch } = useAuthContext();
+
   const [step, setStep] = useState<number>(1);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -54,7 +57,9 @@ function SignUp() {
   const onSubmit: SubmitHandler<RegisterType> = async (data: RegisterType) => {
     mutate(data, {
       onSuccess: () => {
+        // #TODO: Implement logic to correctly navigate user to waitlist page
         setIsSubmitted(true);
+        refetch();
       },
       onError: (error) => {
         setError("root", {

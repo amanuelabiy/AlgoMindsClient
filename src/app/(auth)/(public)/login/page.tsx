@@ -23,7 +23,7 @@ const styles = {
 };
 
 function Login() {
-  const { setUser } = useAuthContext();
+  const { setUser, refetch } = useAuthContext();
   const router = useRouter();
 
   const {
@@ -53,6 +53,7 @@ function Login() {
         if (response.data.mfaRequired) {
           router.replace(`/verify-mfa?email=${data.email}`);
         }
+        refetch();
         setUser(response.data.data);
         router.replace("/waitlist");
       },
