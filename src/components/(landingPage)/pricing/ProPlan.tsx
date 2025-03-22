@@ -5,6 +5,13 @@ import React, { useEffect, useState } from "react";
 import Switch from "./Switch";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { User } from "@/context/authProvider";
+import { useRouter } from "next/navigation";
+
+interface ProPlanProps {
+  user: User | null | undefined;
+}
+
 const generateSparklePositions = (count: number) => {
   return Array.from({ length: count }).map(() => ({
     top: `${Math.random() * 100}%`,
@@ -14,15 +21,24 @@ const generateSparklePositions = (count: number) => {
   }));
 };
 
-function ProPlan() {
+function ProPlan({ user }: ProPlanProps) {
   const [isAnnual, setIsAnnual] = useState(true);
   const [sparkles, setSparkles] = useState<
     { top: string; left: string; delay: number; duration: number }[]
   >([]);
+  const router = useRouter();
 
   useEffect(() => {
     setSparkles(generateSparklePositions(10));
   }, []);
+
+  const handleGetStartedClick = () => {
+    if (user) {
+      router.push("/waitlist");
+    } else {
+      router.push("/signup");
+    }
+  };
 
   return (
     <motion.div
@@ -113,6 +129,7 @@ function ProPlan() {
       </ul>
       <div className="flex justify-center flex-row items-center w-full">
         <Button
+          onClick={handleGetStartedClick}
           variant="outline"
           className="bg-blue-500 w-[90%] button-transform text-white border-secondaryColor border-2 hover:text-white hover:bg-blue-800 py-5 text-xl px-6 rounded-lg"
         >

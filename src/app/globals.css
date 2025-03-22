@@ -8,6 +8,14 @@
   @apply transition-all duration-200 hover:scale-105 hover:z-10 hover:shadow-lg active:scale-100;
 }
 
+.bg-gradient-light {
+  background: linear-gradient(135deg, #f5faff, #e3f1ff);
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
 body {
   font-family: "Chakra Petch", sans-serif, Helvetica, Arial;
 }
@@ -39,6 +47,8 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --gradient-bg: linear-gradient(135deg, #f5faff, #e3f1ff);
+    --nav-fill: 210 100% 97%;
   }
   .dark {
     --background: 222.2 84% 4.9%;
@@ -65,6 +75,8 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --gradient-bg: linear-gradient(135deg, #0f172a, #1e293b);
+    --nav-fill: 222, 47%, 11%;
   }
 }
 
@@ -93,6 +105,15 @@ body {
   }
   50% {
     transform: translateX(5px);
+  }
+}
+
+@layer components {
+  .theme-gradient-bg {
+    background: var(--gradient-bg);
+  }
+  .navbar-bg {
+    background-color: hsl(var(--nav-fill));
   }
 }
 

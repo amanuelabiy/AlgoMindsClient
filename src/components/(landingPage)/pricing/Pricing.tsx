@@ -8,8 +8,10 @@ import {
   pricingDisclaimerContainer,
   pricingTextContainer,
 } from "@/utils/framerMotion/container";
+import { useAuthContext } from "@/context/authProvider";
 
 function Pricing() {
+  const { user } = useAuthContext();
   return (
     <div
       id="pricing"
@@ -32,8 +34,8 @@ function Pricing() {
 
       {/* Pricing Cards */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-14 w-full">
-        <StarterPlan />
-        <ProPlan />
+        <StarterPlan user={user} />
+        <ProPlan user={user} />
       </div>
       <motion.div
         variants={pricingDisclaimerContainer(0.2)}

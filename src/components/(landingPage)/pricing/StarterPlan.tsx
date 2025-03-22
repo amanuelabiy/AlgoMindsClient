@@ -3,8 +3,23 @@ import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import React from "react";
 import { motion } from "framer-motion";
+import { User } from "@/context/authProvider";
+import { useRouter } from "next/navigation";
 
-function StarterPlan() {
+interface StarterPlanProps {
+  user: User | null | undefined;
+}
+
+function StarterPlan({ user }: StarterPlanProps) {
+  const router = useRouter();
+
+  const handleGetStartedClick = () => {
+    if (user) {
+      router.push("/waitlist");
+    } else {
+      router.push("/signup");
+    }
+  };
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0 }}
@@ -48,6 +63,7 @@ function StarterPlan() {
       </ul>
       <div className="flex justify-center flex-row items-center w-full">
         <Button
+          onClick={handleGetStartedClick}
           variant="outline"
           className="bg-white w-[90%] text-secondaryColor border-secondaryColor border-2 hover:text-secondaryColor py-5 text-xl px-6 rounded-lg"
         >

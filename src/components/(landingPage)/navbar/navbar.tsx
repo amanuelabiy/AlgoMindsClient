@@ -99,6 +99,7 @@ function Navbar() {
 
   const displayGuestNavLinks = displayButtons && isLanding;
   const displayProfilePicture = isLanding && user;
+
   return (
     <motion.nav
       variants={isLanding ? container(0) : undefined}

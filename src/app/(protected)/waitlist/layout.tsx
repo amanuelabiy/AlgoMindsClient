@@ -5,7 +5,7 @@ function WaitListPageLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <section className="max-w-[1600px] mx-auto w-full">
+    <section>
       <Navbar />
       {children}
     </section>

@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "./authProvider";
 import QueryProvider from "./query-provider";
 
