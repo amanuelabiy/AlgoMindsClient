@@ -5,6 +5,7 @@ import ProblemsFaced from "./problemsFaced/ProblemsFaced";
 import Hero from "./hero/hero";
 import Navbar from "./navbar/navbar";
 import Pricing from "./pricing/Pricing";
+import { ThemeProvider } from "../ThemeProvider";
 
 function LandingPage() {
   return (
@@ -17,19 +18,27 @@ function LandingPage() {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="max-w-[1600px] mx-auto w-full">
-        <Navbar />
-        <Hero />
-        <div className="mt-8 rounded-full">
-          <ProblemsFaced />
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="light"
+        forcedTheme="light"
+        enableSystem={false}
+        disableTransitionOnChange
+      >
+        <div className="max-w-[1600px] mx-auto w-full">
+          <Navbar />
+          <Hero />
+          <div className="mt-8 rounded-full">
+            <ProblemsFaced />
+          </div>
+          <AboutUs />
+          <Pricing />
+
+          <Faq />
+
+          <Footer />
         </div>
-        <AboutUs />
-        <Pricing />
-
-        <Faq />
-
-        <Footer />
-      </div>
+      </ThemeProvider>
     </div>
   );
 }

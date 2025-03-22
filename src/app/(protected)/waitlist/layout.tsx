@@ -1,12 +1,12 @@
-import Navbar from "@/components/(landingPage)/navbar/navbar";
+import AuthNavbar from "@/components/(protected)/navbar/AuthNavbar";
 import React from "react";
 
 function WaitListPageLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <section>
-      <Navbar />
+    <section className="pt-5">
+      <AuthNavbar />
       {children}
     </section>
   );

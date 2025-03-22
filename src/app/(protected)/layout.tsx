@@ -33,7 +33,7 @@ export default async function ProtectedLayout({
     <section className="max-w-[1600px] mx-auto w-full min-h-screen">
       <ThemeProvider
         attribute="class"
-        defaultTheme="system"
+        defaultTheme="dark"
         enableSystem
         disableTransitionOnChange
       >

@@ -49,6 +49,7 @@ body {
     --radius: 0.5rem;
     --gradient-bg: linear-gradient(135deg, #f5faff, #e3f1ff);
     --nav-fill: 210 100% 97%;
+    --coming-soon-box: 216 33% 97%;
   }
   .dark {
     --background: 222.2 84% 4.9%;
@@ -77,6 +78,7 @@ body {
     --chart-5: 340 75% 55%;
     --gradient-bg: linear-gradient(135deg, #0f172a, #1e293b);
     --nav-fill: 222, 47%, 11%;
+    --coming-soon-box: 224 29% 15%;
   }
 }
 
@@ -114,6 +116,43 @@ body {
   }
   .navbar-bg {
     background-color: hsl(var(--nav-fill));
+  }
+  .coming-soon-box {
+    background-color: hsl(var(--coming-soon-box));
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #ffffff 0%, #2980b9 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    backdrop-filter: blur(5px);
+  }
+
+  .gradient-text-light {
+    background: linear-gradient(90deg, #000000 0%, #1e3a8a 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    backdrop-filter: blur(5px);
+  }
+
+  .gradient-bg-light {
+    background: linear-gradient(90deg, #ffffff 0%, #2980b9 100%);
+    color: #000;
+  }
+
+  .gradient-bg-dark {
+    background: linear-gradient(90deg, #000000 0%, #1e3a8a 100%);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .text-shadow-xl {
+    text-shadow: 5px 4px 100px #000;
   }
 }
 
