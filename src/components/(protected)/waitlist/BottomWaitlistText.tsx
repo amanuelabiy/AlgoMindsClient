@@ -6,7 +6,7 @@ function BottomWaitlistText() {
       <h1 className="text-[#383f46] dark:text-[#606a75] max-w-sm text-center text-sm font-normal">
         You're in! 🎉 You’ve joined{" "}
         <span className="dark:gradient-text gradient-text-light font-extrabold underline">
-          100
+          many
         </span>{" "}
         other ambitious devs gearing up to transform how interviews are done —
         together.
