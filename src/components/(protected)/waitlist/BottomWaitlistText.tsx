@@ -3,7 +3,7 @@ import React from "react";
 function BottomWaitlistText() {
   return (
     <div className="flex flex-col justify-center items-center gap-20">
-      <h1 className="text-[#383f46] dark:text-[#606a75] max-w-sm text-center text-sm font-normal">
+      <h1 className="text-[#383f46] dark:text-[#606a75] xs:max-w-sm text-center max-w-xs  text-xs xs:text-sm font-normal">
         You're in! 🎉 You’ve joined{" "}
         <span className="dark:gradient-text gradient-text-light font-extrabold underline">
           many
