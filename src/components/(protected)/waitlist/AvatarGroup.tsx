@@ -16,7 +16,7 @@ function AvatarGroup() {
       {avatars.map((avatar) => (
         <Avatar
           key={avatar.id}
-          className="w-8 h-8 border-2 border-white dark:border-primaryColor rounded-full transition-transform duration-200 hover:scale-110 hover:z-10"
+          className="w-8 h-8 border-2 border-white cursor-pointer dark:border-primaryColor rounded-full transition-transform duration-200 hover:scale-110 hover:z-10"
         >
           {avatar.src ? (
             <AvatarImage src={avatar.src} alt={`Avatar ${avatar.id}`} />
