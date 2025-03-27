@@ -13,6 +13,7 @@ import { TiArrowRight, TiArrowLeft } from "react-icons/ti";
 import { useMutation } from "@tanstack/react-query";
 import VerifyEmailCard from "@/components/auth/signup/VerifyEmailCard";
 import { useAuthContext } from "@/context/authProvider";
+import { useRouter } from "next/navigation";
 
 const styles = {
   input:
@@ -23,7 +24,9 @@ const styles = {
 };
 
 function SignUp() {
-  const { refetch } = useAuthContext();
+  const { setUser, refetch } = useAuthContext();
+
+  const router = useRouter();
 
   const [step, setStep] = useState<number>(1);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -56,9 +59,10 @@ function SignUp() {
 
   const onSubmit: SubmitHandler<RegisterType> = async (data: RegisterType) => {
     mutate(data, {
-      onSuccess: () => {
-        // #TODO: Implement logic to correctly navigate user to waitlist page
+      onSuccess: (response) => {
         setIsSubmitted(true);
+        setUser(response.data.data);
+        router.replace("/");
         refetch();
       },
       onError: (error) => {
@@ -75,6 +79,7 @@ function SignUp() {
       "lastName",
       "email",
       "password",
+      "confirmPassword",
     ]);
     if (result) {
       setStep(2);
@@ -107,10 +112,15 @@ function SignUp() {
             {" "}
             <div className="flex flex-col gap-4 items-center justify-center">
               <h2 className="text-4xl font-bold text-center">Sign up now</h2>
-              <p className="text-gray-500 text-center max-w-4xl">
-                Compete, collaborate, and master data structures & algorithms in
-                real-time with friends.
-              </p>
+              {step === 2 ? (
+                <>
+                  {" "}
+                  <p className="text-gray-500 text-center max-w-4xl mb-10">
+                    Compete, collaborate, and master data structures &
+                    algorithms in real-time with friends.
+                  </p>
+                </>
+              ) : null}
             </div>
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               {step === 1 ? (
@@ -192,6 +202,25 @@ function SignUp() {
                       </span>
                     )}
                   </div>
+                  <div className="mb-4">
+                    <Label className={styles.label} htmlFor="confirmPassword">
+                      Confirm Password
+                    </Label>
+                    <Input
+                      type="password"
+                      className={styles.input}
+                      placeholder="************"
+                      id="confirmPassword"
+                      {...register("confirmPassword", {
+                        required: "Confirm Password is required",
+                      })}
+                    />
+                    {errors.confirmPassword && (
+                      <span className={styles.errorMessage}>
+                        {errors.confirmPassword.message}
+                      </span>
+                    )}
+                  </div>
                 </>
               ) : null}
 
@@ -224,25 +253,7 @@ function SignUp() {
                       </span>
                     )}
                   </div>
-                  <div className="mb-4">
-                    <Label className={styles.label} htmlFor="confirmPassword">
-                      Confirm Password
-                    </Label>
-                    <Input
-                      type="password"
-                      className={styles.input}
-                      placeholder="************"
-                      id="confirmPassword"
-                      {...register("confirmPassword", {
-                        required: "Confirm Password is required",
-                      })}
-                    />
-                    {errors.confirmPassword && (
-                      <span className={styles.errorMessage}>
-                        {errors.confirmPassword.message}
-                      </span>
-                    )}
-                  </div>
+
                   {displayRootError && (
                     <p className={`${styles.errorMessage} text-center my-2`}>
                       {errors.root?.message}

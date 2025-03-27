@@ -10,24 +10,28 @@ export default async function ProtectedLayout({
 }) {
   const cookieStore = cookies();
   const accessToken = (await cookieStore).get("accessToken")?.value;
+  try {
+    if (!accessToken) {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/refresh`,
+        {
+          method: "GET",
+          headers: {
+            Cookie: (await cookieStore).toString(),
+          },
+          credentials: "include",
+          cache: "no-store",
+        }
+      );
 
-  if (!accessToken) {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/refresh`,
-      {
-        method: "GET",
-        headers: {
-          Cookie: (await cookieStore).toString(),
-        },
-        credentials: "include",
-        cache: "no-store",
+      if (!response.ok) {
+        redirect("/login");
       }
-    );
-
-    if (!response.ok) {
-      redirect("/login");
     }
+  } catch (error) {
+    console.error("Server Request Error:", error);
   }
+
   // Only render page if refresh succeeds
   return (
     <section className="max-w-[1600px] mx-auto w-full min-h-screen">

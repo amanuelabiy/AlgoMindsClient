@@ -9,26 +9,30 @@ export default async function BetaLayout({
 }) {
   const cookieStore = cookies();
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/session/`,
-    {
-      method: "GET",
-      headers: {
-        Cookie: (await cookieStore).toString(),
-      },
-      credentials: "include",
-      cache: "no-store",
-    }
-  );
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/session/`,
+      {
+        method: "GET",
+        headers: {
+          Cookie: (await cookieStore).toString(),
+        },
+        credentials: "include",
+        cache: "no-store",
+      }
+    );
 
-  if (!response.ok) {
-    redirect("/waitlist");
-  } else {
-    const data = await response.json();
-    if (!data.user.isBetaUser) {
-      console.log("Redirecting to waitlist");
+    if (!response.ok) {
       redirect("/waitlist");
+    } else {
+      const data = await response.json();
+      if (!data.user.isBetaUser) {
+        console.log("Redirecting to waitlist");
+        redirect("/waitlist");
+      }
     }
+  } catch (error) {
+    console.error("Server Request Error:", error);
   }
 
   return <>{children}</>;

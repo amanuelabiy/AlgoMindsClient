@@ -111,7 +111,7 @@ function Navbar() {
         <div className="">
           <h1
             onClick={handleLogoClick}
-            className={`flex flex-row justify-center items-start text-black text-2xl sm:text-[36px] font-chakra font-bold leading-normal button-transform hover:cursor-pointer hover:shadow-none`}
+            className={`flex flex-row justify-center items-start text-black text-2xl font-chakra font-bold leading-normal button-transform hover:cursor-pointer hover:shadow-none`}
           >
             <FontAwesomeIcon
               icon={faRobot}
